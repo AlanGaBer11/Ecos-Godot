@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bgwcpt5q2s5r0"]
+
+[node name="NivelBosque" type="Node2D"]
+position = Vector2(550, 294)
