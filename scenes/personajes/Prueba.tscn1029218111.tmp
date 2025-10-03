@@ -1,10 +1,21 @@
 [gd_scene load_steps=34 format=3 uid="uid://dqjqylpdujjui"]
 
-[ext_resource type="Script" uid="uid://dy4xak7km5wxa" path="res://scripts/personajes/Prueba.gd" id="1_50jgp"]
 [ext_resource type="Texture2D" uid="uid://dxkh0o7jemgn7" path="res://assets/sprites/prueba/4_Cat_Fall-Sheet.png" id="2_50jgp"]
 [ext_resource type="Texture2D" uid="uid://ccuw1y3rj4yrm" path="res://assets/sprites/prueba/1_Cat_Idle-Sheet.png" id="2_eona1"]
 [ext_resource type="Texture2D" uid="uid://bgi65kardih1g" path="res://assets/sprites/prueba/2_Cat_Run-Sheet.png" id="3_50jgp"]
 [ext_resource type="Texture2D" uid="uid://cxuk308qtip04" path="res://assets/sprites/prueba/3_Cat_Jump-Sheet.png" id="4_avn7f"]
+
+[sub_resource type="GDScript" id="GDScript_eona1"]
+script/source = "# Tobio hereda de Personaje (Herencia).
+
+class_name Tobio
+extends \"res://scripts/personajes/Personaje.gd\"
+
+func _ready():
+	# Personalizar atributos: Tobio es más rápido y salta más.
+	_velocidad_base = 400.0
+	_fuerza_salto_base = 450.0
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rr386"]
 atlas = ExtResource("2_50jgp")
@@ -126,7 +137,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_vbgxi")
 }],
 "loop": true,
-"name": &"fall",
+"name": &"Fall",
 "speed": 8.0
 }, {
 "frames": [{
@@ -155,7 +166,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_x28nm")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 8.0
 }, {
 "frames": [{
@@ -172,7 +183,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_hq1e0")
 }],
 "loop": true,
-"name": &"jump",
+"name": &"Jump",
 "speed": 8.0
 }, {
 "frames": [{
@@ -207,23 +218,22 @@ animations = [{
 "texture": SubResource("AtlasTexture_jbrdr")
 }],
 "loop": true,
-"name": &"run",
+"name": &"Run",
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_eona1"]
-radius = 24.3311
+[sub_resource type="CircleShape2D" id="CircleShape2D_50jgp"]
 
 [node name="Prueba" type="CharacterBody2D"]
-script = ExtResource("1_50jgp")
+script = SubResource("GDScript_eona1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -71)
+position = Vector2(529, 198)
 scale = Vector2(5.875, 5.9375)
 sprite_frames = SubResource("SpriteFrames_dxufj")
-animation = &"idle"
-autoplay = "idle"
+animation = &"Idle"
+frame_progress = 0.433348
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -25)
-shape = SubResource("CircleShape2D_eona1")
+position = Vector2(409, 196)
+shape = SubResource("CircleShape2D_50jgp")

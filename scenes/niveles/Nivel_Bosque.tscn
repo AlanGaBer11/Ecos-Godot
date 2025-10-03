@@ -1,4 +1,21 @@
-[gd_scene format=3 uid="uid://bgwcpt5q2s5r0"]
+[gd_scene load_steps=3 format=3 uid="uid://ciix8hp0augjo"]
+
+[ext_resource type="PackedScene" uid="uid://dqjqylpdujjui" path="res://scenes/personajes/Prueba.tscn" id="2_kxoys"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5i7ka"]
+normal = Vector2(0.00884921, -0.999961)
 
 [node name="NivelBosque" type="Node2D"]
-position = Vector2(550, 294)
+
+[node name="Prueba" parent="." instance=ExtResource("2_kxoys")]
+position = Vector2(55, 106)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(53, 54)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(54, 109)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3, -8)
+shape = SubResource("WorldBoundaryShape2D_5i7ka")
