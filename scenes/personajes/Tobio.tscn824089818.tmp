@@ -1,13 +1,10 @@
-[gd_scene load_steps=49 format=3 uid="uid://b04mlgqr6ym37"]
+[gd_scene load_steps=34 format=3 uid="uid://b04mlgqr6ym37"]
 
 [ext_resource type="Script" uid="uid://db7tnmqttgb5r" path="res://scripts/personajes/Tobio.gd" id="1_d1of5"]
 [ext_resource type="Texture2D" uid="uid://cny13xt6tynbx" path="res://assets/sprites/tobio/1_Tobio_Idle.png" id="1_l8fqe"]
-[ext_resource type="PackedScene" uid="uid://jxi8dy1vmhjq" path="res://scenes/objetos/Proyectil.tscn" id="2_hoarg"]
 [ext_resource type="Texture2D" uid="uid://cu5v2betsljaq" path="res://assets/sprites/tobio/4_Tobio_Fall.png" id="2_oskxx"]
 [ext_resource type="Texture2D" uid="uid://cy6jmg3u4d156" path="res://assets/sprites/tobio/3_Tobio_Jump.png" id="4_4l2ex"]
-[ext_resource type="Texture2D" uid="uid://d2fwcoj6cuc8g" path="res://assets/sprites/tobio/21_Tobio_Ranged_Attack.png" id="5_4l2ex"]
 [ext_resource type="Texture2D" uid="uid://oo12d6upb1aj" path="res://assets/sprites/tobio/2_Tobio_Run.png" id="5_hoarg"]
-[ext_resource type="Texture2D" uid="uid://bc0rvf4sgsmpt" path="res://assets/sprites/tobio/22_Tobio_Jump_Ranged_Attack.png" id="6_gxhmi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jngty"]
 atlas = ExtResource("2_oskxx")
@@ -73,54 +70,6 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("4_4l2ex")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aud5o"]
-atlas = ExtResource("6_gxhmi")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eust3"]
-atlas = ExtResource("6_gxhmi")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ouu3r"]
-atlas = ExtResource("6_gxhmi")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_60u2p"]
-atlas = ExtResource("6_gxhmi")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vvylf"]
-atlas = ExtResource("6_gxhmi")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y43yo"]
-atlas = ExtResource("6_gxhmi")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_phvtv"]
-atlas = ExtResource("5_4l2ex")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nueiv"]
-atlas = ExtResource("5_4l2ex")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0ecx"]
-atlas = ExtResource("5_4l2ex")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pfpoq"]
-atlas = ExtResource("5_4l2ex")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kve1"]
-atlas = ExtResource("5_4l2ex")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tpexa"]
-atlas = ExtResource("5_4l2ex")
-region = Rect2(160, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1od8n"]
 atlas = ExtResource("5_hoarg")
 region = Rect2(0, 0, 32, 32)
@@ -178,7 +127,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
-"speed": 6.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -207,7 +156,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 6.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -224,53 +173,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 6.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aud5o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eust3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ouu3r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_60u2p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vvylf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y43yo")
-}],
-"loop": true,
-"name": &"jump_ranged_attack",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_phvtv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nueiv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j0ecx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pfpoq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6kve1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tpexa")
-}],
-"loop": true,
-"name": &"ranged_attack",
-"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -305,7 +208,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 8.0
+"speed": 105.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8fqe"]
@@ -313,21 +216,17 @@ size = Vector2(97, 97)
 
 [node name="Tobio" type="CharacterBody2D"]
 script = ExtResource("1_d1of5")
-projectile_scene = ExtResource("2_hoarg")
+_velocidad_base = null
+_fuerza_salto_base = null
+_max_salud = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -60)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_jngty")
-animation = &"ranged_attack"
+animation = &"run"
 autoplay = "idle"
-frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, -48.5)
 shape = SubResource("RectangleShape2D_l8fqe")
-
-[node name="ProyectilSpawn" type="Node2D" parent="."]
-position = Vector2(54, -48)
-
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

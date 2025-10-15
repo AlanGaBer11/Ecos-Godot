@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciix8hp0augjo"]
+
+[ext_resource type="PackedScene" uid="uid://b04mlgqr6ym37" path="res://scenes/personajes/Tobio.tscn" id="2_kxoys"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5i7ka"]
+
+[node name="NivelBosque" type="Node2D"]
+
+[node name="Tobio" parent="." instance=ExtResource("2_kxoys")]
+position = Vector2(66, 144)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(75, 105)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(63, 145)
+shape = SubResource("WorldBoundaryShape2D_5i7ka")
