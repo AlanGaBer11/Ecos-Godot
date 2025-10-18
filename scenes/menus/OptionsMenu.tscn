@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://rwm8anappmi1"]
+
+[ext_resource type="FontFile" uid="uid://de3kjs4g003bs" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_fd6x8"]
+[ext_resource type="Script" uid="uid://dt2mh87xvb8jk" path="res://scripts/menus/OptionsMenu.gd" id="1_iy18p"]
+[ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="2_dfv8g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fd6x8"]
+font = ExtResource("1_fd6x8")
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_dfv8g"]
+font = ExtResource("2_dfv8g")
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_iy18p"]
+font = ExtResource("2_dfv8g")
+font_size = 22
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iy18p")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -139.5
+offset_right = 79.0
+offset_bottom = 139.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "OPCIONES"
+label_settings = SubResource("LabelSettings_fd6x8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelVol" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Volumen de la música"
+label_settings = SubResource("LabelSettings_dfv8g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MucisBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelMusic" type="Label" parent="Panel/VBoxContainer/MucisBoxContainer"]
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="Panel/VBoxContainer/MucisBoxContainer"]
+layout_mode = 2
+value = 50.0
+
+[node name="SfxLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Volumen efectos"
+label_settings = SubResource("LabelSettings_iy18p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SfxBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelSfx" type="Label" parent="Panel/VBoxContainer/SfxBoxContainer"]
+layout_mode = 2
+
+[node name="SfxSlider" type="HSlider" parent="Panel/VBoxContainer/SfxBoxContainer"]
+layout_mode = 2
+value = 50.0
+
+[node name="FullScreen" type="CheckBox" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Pantalla completa"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Guardar"
+
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Volver"

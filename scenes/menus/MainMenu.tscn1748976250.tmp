@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://b16rjxs5kya5n"]
+
+[ext_resource type="Script" uid="uid://dwxapssrhc627" path="res://scripts/menus/MainMenu.gd" id="1_ldf1p"]
+[ext_resource type="Texture2D" uid="uid://dnw52x6w4hdxx" path="res://assets/sprites/menu_background.png" id="1_wlpbi"]
+[ext_resource type="FontFile" uid="uid://de3kjs4g003bs" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_bqojv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wlpbi"]
+font = ExtResource("2_bqojv")
+font_size = 100
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ldf1p")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 648.0
+texture = ExtResource("1_wlpbi")
+expand_mode = 5
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 125.0
+offset_right = 665.0
+offset_bottom = 226.0
+text = "Ecos"
+label_settings = SubResource("LabelSettings_wlpbi")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.0
+anchor_top = 2.0
+anchor_right = 2.0
+anchor_bottom = 2.0
+offset_left = 459.0
+offset_top = 258.0
+offset_right = 664.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Jugar"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Opciones"
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Créditos
+"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Salr
+"

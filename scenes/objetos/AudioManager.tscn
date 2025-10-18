@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://gwlxtlrr1lli"]
+
+[ext_resource type="Script" uid="uid://detha06h7x37" path="res://scripts/singleton/AudioManager.gd" id="1_vecaa"]
+[ext_resource type="AudioStream" uid="uid://tk8owb5jd27b" path="res://assets/audio/MainTheme.ogg" id="2_2a7kt"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_vecaa")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2a7kt")
+bus = &"Music"
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

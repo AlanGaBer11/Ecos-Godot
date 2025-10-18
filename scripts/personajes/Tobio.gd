@@ -23,8 +23,12 @@ var current_attack_anim := ""         # Animación actual de ataque
 # -----------------------------
 var waiting_for_double := false       # Control de espera para detectar doble toque
 var double_attack_time := 0.5         # Tiempo máximo para considerar doble toque
-var double_attack_timer := 0.0        # Temporizador interno (no usado aquí)
 var last_attack_time := 0.0           # Momento del último ataque para detectar doble toque
+
+# -----------------------------
+# ATAQUE ESPECIAL (para controlar golpes múltiples)
+# -----------------------------
+var special_attack_hit_done := false  # Evita aplicar daño múltiple en special_attack
 
 # -----------------------------
 # READY
@@ -126,7 +130,6 @@ func _atacar() -> void:
 
 # Ataque doble
 func _ataque_doble() -> void:
-	# Permitir interrumpir cualquier ataque actual
 	is_attacking = true
 	can_shoot = false
 	shoot_cooldown = 0.6
@@ -148,6 +151,7 @@ func _ataque_especial() -> void:
 	can_shoot = false
 	shoot_cooldown = 1.0
 	projectile_fired = false
+	special_attack_hit_done = false
 
 	current_attack_anim = "special_attack"
 
@@ -188,21 +192,35 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	var anim = sprite.animation
 
 	if anim == current_attack_anim:
-		# Ataque a distancia: lanzar proyectil
+		# ----------------------------------------
+		# ATAQUE A DISTANCIA (disparo en frame 3)
+		# ----------------------------------------
 		if anim == "ranged_attack" or anim == "jump_ranged_attack":
 			if current_frame == 3 and not projectile_fired:
 				_lanzar_proyectil()
 				projectile_fired = true
 
-		# Ataque cuerpo a cuerpo: aplicar daño en frame 2
+		# ----------------------------------------
+		# ATAQUES CUERPO A CUERPO
+		# ----------------------------------------
 		elif anim in ["attack", "jump_attack", "attack_2_hits", "special_attack"]:
-			if current_frame == 2:
-				_aplicar_dano()
+			if anim == "special_attack":
+				# Golpe en frames 2, 3 y 4
+				if current_frame >= 2 and current_frame <= 4 and not special_attack_hit_done:
+					_aplicar_dano()
+					special_attack_hit_done = true
+			else:
+				# Golpe simple (frame 2)
+				if current_frame == 2:
+					_aplicar_dano()
 
-		# Cuando termina animación, liberar control
+		# ----------------------------------------
+		# FINALIZAR ATAQUE (pequeña pausa)
+		# ----------------------------------------
 		if current_frame == sprite.sprite_frames.get_frame_count(anim) - 1:
 			await get_tree().create_timer(0.05).timeout
 			is_attacking = false
+			special_attack_hit_done = false
 
 
 # -----------------------------
@@ -210,7 +228,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 # -----------------------------
 func _aplicar_dano() -> void:
 	print("¡Golpe ejecutado! (desde ", current_attack_anim, ")")
-	# Aquí puedes detectar enemigos usando Area2D o raycast
+	# Aquí podrías detectar enemigos usando Area2D o RayCast2D
 
 func _lanzar_proyectil() -> void:
 	if projectile_scene:

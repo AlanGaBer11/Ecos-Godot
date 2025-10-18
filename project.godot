@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Ecos"
-run/main_scene="uid://ciix8hp0augjo"
+run/main_scene="uid://b16rjxs5kya5n"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+AudioManager="*res://scenes/objetos/AudioManager.tscn"
 
 [input]
 
@@ -68,3 +72,4 @@ special_attack={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
