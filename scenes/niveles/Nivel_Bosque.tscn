@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciix8hp0augjo"]
+[gd_scene load_steps=5 format=3 uid="uid://ciix8hp0augjo"]
 
+[ext_resource type="PackedScene" uid="uid://qt683vfk4pcp" path="res://scenes/menus/Fps.tscn" id="2_kispg"]
 [ext_resource type="PackedScene" uid="uid://b04mlgqr6ym37" path="res://scenes/personajes/Tobio.tscn" id="2_kxoys"]
+[ext_resource type="PackedScene" uid="uid://cmjkyy3to1my5" path="res://scenes/menus/PauseMenu.tscn" id="3_kxoys"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5i7ka"]
 
@@ -17,3 +19,11 @@ position = Vector2(75, 105)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(63, 145)
 shape = SubResource("WorldBoundaryShape2D_5i7ka")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPS" parent="CanvasLayer" instance=ExtResource("2_kispg")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_kxoys")]
+process_mode = 1
+visible = false

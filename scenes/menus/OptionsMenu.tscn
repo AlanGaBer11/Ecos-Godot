@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://rwm8anappmi1"]
+[gd_scene load_steps=8 format=3 uid="uid://rwm8anappmi1"]
 
 [ext_resource type="FontFile" uid="uid://de3kjs4g003bs" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_fd6x8"]
 [ext_resource type="Script" uid="uid://dt2mh87xvb8jk" path="res://scripts/menus/OptionsMenu.gd" id="1_iy18p"]
 [ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="2_dfv8g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy18p"]
+bg_color = Color(0, 0, 0, 0.121569)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fd6x8"]
 font = ExtResource("1_fd6x8")
@@ -32,6 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iy18p")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -93,6 +97,8 @@ value = 50.0
 
 [node name="FullScreen" type="CheckBox" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_dfv8g")
+theme_override_font_sizes/font_size = 20
 text = "Pantalla completa"
 alignment = 1
 
@@ -103,8 +109,12 @@ theme_override_constants/separation = 30
 
 [node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_dfv8g")
+theme_override_font_sizes/font_size = 24
 text = "Guardar"
 
 [node name="ExitButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_dfv8g")
+theme_override_font_sizes/font_size = 24
 text = "Volver"

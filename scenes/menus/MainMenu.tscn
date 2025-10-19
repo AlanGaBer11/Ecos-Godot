@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b16rjxs5kya5n"]
+[gd_scene load_steps=6 format=3 uid="uid://b16rjxs5kya5n"]
 
 [ext_resource type="Script" uid="uid://dwxapssrhc627" path="res://scripts/menus/MainMenu.gd" id="1_ldf1p"]
 [ext_resource type="Texture2D" uid="uid://dnw52x6w4hdxx" path="res://assets/sprites/menu_background.png" id="1_wlpbi"]
 [ext_resource type="FontFile" uid="uid://de3kjs4g003bs" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_bqojv"]
+[ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="4_tyyoy"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_wlpbi"]
+[sub_resource type="LabelSettings" id="LabelSettings_ldf1p"]
 font = ExtResource("2_bqojv")
 font_size = 100
 
@@ -28,54 +29,51 @@ grow_vertical = 2
 texture = ExtResource("1_wlpbi")
 expand_mode = 1
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.407118
-anchor_top = 0.154321
-anchor_right = 0.592882
-anchor_bottom = 0.310185
-offset_top = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-text = "Ecos"
-label_settings = SubResource("LabelSettings_wlpbi")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-uppercase = true
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -102.5
-offset_top = -77.0
-offset_right = 102.5
-offset_bottom = 77.0
+offset_left = -183.0
+offset_top = -240.0
+offset_right = 167.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "ECOS"
+label_settings = SubResource("LabelSettings_ldf1p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_tyyoy")
+theme_override_font_sizes/font_size = 24
 text = "Jugar"
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_tyyoy")
+theme_override_font_sizes/font_size = 24
 text = "Opciones"
 
-[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+[node name="ExitButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
-text = "Créditos
-"
-
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+theme_override_fonts/font = ExtResource("4_tyyoy")
+theme_override_font_sizes/font_size = 24
 text = "Salir"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

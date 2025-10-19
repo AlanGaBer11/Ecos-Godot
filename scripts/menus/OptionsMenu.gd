@@ -64,12 +64,22 @@ func _on_save_pressed() -> void:
 	# Guardar configuración
 	_save_config()
 	
-	# Volver al MainMenu
-	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
+	# Volver a la escena anterior
+	_return_to_previous_scene()
 
 func _on_back_pressed() -> void:
 	# Volver sin guardar
-	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
+	_return_to_previous_scene()
+
+func _return_to_previous_scene() -> void:
+	# Si venimos del juego pausado, volver al juego
+	if SceneManager.is_game_paused and SceneManager.previous_scene != "":
+		print("Regresando al juego pausado: ", SceneManager.previous_scene)
+		get_tree().change_scene_to_file(SceneManager.previous_scene)
+	else:
+		# Si venimos del MainMenu, volver al MainMenu
+		print("Regresando al MainMenu")
+		get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
 
 # --- Configuración ---
 func _save_config() -> void:

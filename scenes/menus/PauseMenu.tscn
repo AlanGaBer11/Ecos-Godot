@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmjkyy3to1my5"]
+
+[ext_resource type="Script" uid="uid://beuaadoptf06a" path="res://scripts/menus/PauseMenu.gd" id="1_5c87e"]
+[ext_resource type="FontFile" uid="uid://de3kjs4g003bs" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_wgnbc"]
+[ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="2_i7533"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glp5f"]
+bg_color = Color(0, 0, 0, 0.121569)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7533"]
+font = ExtResource("1_wgnbc")
+font_size = 36
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5c87e")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_glp5f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -120.0
+offset_right = 165.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Juego en pausa"
+label_settings = SubResource("LabelSettings_i7533")
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ContinueBtn" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i7533")
+theme_override_font_sizes/font_size = 24
+text = "Continuar"
+
+[node name="OptionsBtn" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i7533")
+theme_override_font_sizes/font_size = 24
+text = "Opciones"
+
+[node name="ExitBtn" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i7533")
+theme_override_font_sizes/font_size = 24
+text = "Salir"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = ""
+position = Vector2i(451, 274)
+size = Vector2i(250, 100)
+ok_button_text = "Si"
+dialog_hide_on_ok = false
+dialog_autowrap = true
+cancel_button_text = "No"
