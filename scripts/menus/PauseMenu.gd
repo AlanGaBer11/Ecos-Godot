@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _input(event): 
-	if event.is_action_pressed("pause"): 
+	if event.is_action_pressed("ui_select"): 
 		_toggle_pause() 
 
 

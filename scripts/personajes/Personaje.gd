@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		_saltos_disponibles = 2 # Reinicia saltos al tocar el suelo
 
 	# 2. Manejar movimiento horizontal (Input.get_axis devuelve -1..1)
-	var direccion_x: float = Input.get_axis("left", "right")
+	var direccion_x: float = Input.get_axis("ui_left", "ui_right")
 
 	# Si hay entrada horizontal, velocidad directa; si no, desacelerar hacia 0
 	if direccion_x != 0.0:
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 # --------------------------------------------------------------------------
 func saltar() -> void:
 	# Usa la acción "ui_accept" para saltar (configurar en Input Map)
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("ui_up"):
 		if _saltos_disponibles > 0:
 			velocity.y = -_fuerza_salto_base
 			_saltos_disponibles -= 1

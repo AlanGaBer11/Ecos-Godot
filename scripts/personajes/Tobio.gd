@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	# -----------------------------
 	# DETECCIÓN DE ATAQUE SIMPLE / DOBLE
 	# -----------------------------
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("ui_attack"):
 		var now = Time.get_ticks_msec() / 1000.0    # Tiempo actual en segundos
 		if now - last_attack_time < double_attack_time:
 			# Si presionó rápido, ejecutar ataque doble
@@ -70,10 +70,10 @@ func _physics_process(delta: float) -> void:
 	# -----------------------------
 	# OTROS ATAQUES
 	# -----------------------------
-	if Input.is_action_just_pressed("special_attack") and not is_attacking:
+	if Input.is_action_just_pressed("ui_special_attack") and not is_attacking:
 		_ataque_especial()
 
-	if Input.is_action_just_pressed("fire") and can_shoot and not is_attacking:
+	if Input.is_action_just_pressed("ui_fire") and can_shoot and not is_attacking:
 		_disparar()
 
 	# -----------------------------
