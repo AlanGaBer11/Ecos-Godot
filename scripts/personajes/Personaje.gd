@@ -1,4 +1,4 @@
-# Clase base: Personaje
+class_name Personaje
 extends CharacterBody2D
 
 # --------------------------------------------------------------------------
@@ -6,11 +6,13 @@ extends CharacterBody2D
 # --------------------------------------------------------------------------
 @export var _velocidad_base: float = 300.0    # Velocidad horizontal
 @export var _fuerza_salto_base: float = 400.0 # Fuerza de salto
-@export var _max_salud: int = 100             # Salud máxima
+@export var _max_salud: int = 10              # Salud máxima
+@export var _damage: int = 1                  # Daño base del personaje
 
 var _salud_actual: int                         # Salud actual
 var _saltos_disponibles: int = 2               # Para doble salto
 var _gravedad: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var _esta_vivo: bool = true                    # Estado del personaje
 
 # --------------------------------------------------------------------------
 # CICLO DE VIDA
@@ -22,6 +24,9 @@ func _ready() -> void:
 # LÓGICA DE MOVIMIENTO BASE
 # --------------------------------------------------------------------------
 func _physics_process(delta: float) -> void:
+	if not _esta_vivo:
+		return
+
 	# 1. Aplicar gravedad
 	if not is_on_floor():
 		velocity.y += _gravedad * delta
@@ -63,13 +68,33 @@ func curar(cantidad: int) -> void:
 		_salud_actual = _max_salud
 	print("Salud actualizada a: ", _salud_actual)
 
+# --------------------------------------------------------------------------
+# SISTEMA DE DAÑO
+# --------------------------------------------------------------------------
+
+# Aplica daño a otro objetivo si tiene el método recibir_danio
+func aplicar_dano(objetivo: Node) -> void:
+	if objetivo and objetivo.has_method("recibir_danio"):
+		objetivo.recibir_danio(_damage)
+		print(name, " infligió ", _damage, " de daño a ", objetivo.name)
+
+# Recibe daño
 func recibir_danio(cantidad: int) -> void:
+	if not _esta_vivo:
+		return
+
 	_salud_actual -= cantidad
+	print(name, " recibió ", cantidad, " de daño. Salud restante: ", _salud_actual)
+
 	if _salud_actual <= 0:
 		_salud_actual = 0
 		morir()
 
+# El personaje muere
 func morir() -> void:
-	# Placeholder: override en subclases o reproducir animación
-	print("Personaje muerto")
+	if not _esta_vivo:
+		return
+
+	_esta_vivo = false
+	print(name, " ha sido derrotado.")
 	queue_free()
