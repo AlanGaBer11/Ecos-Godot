@@ -559,7 +559,7 @@ script = ExtResource("1_48uvj")
 position = Vector2(3, -61)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_khrxt")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
