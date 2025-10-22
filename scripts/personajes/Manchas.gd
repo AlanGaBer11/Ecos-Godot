@@ -22,7 +22,7 @@ func _ready() -> void:
 	# sprite.connect("frame_changed", Callable(self, "_on_animated_sprite_2d_frame_changed"))
 
 func _on_attack_area_body_entered(body: Node) -> void:
-	if is_attacking:
+	if is_attacking and body != self:
 		aplicar_dano(body)
 
 func _physics_process(delta: float) -> void:
@@ -79,6 +79,11 @@ func _ataque_especial() -> void:
 	current_attack_anim = "special_attack"
 	sprite.play(current_attack_anim)
 
+func _realizar_golpe() -> void:
+	attack_area.monitoring = true
+	await get_tree().create_timer(0.1).timeout
+	attack_area.monitoring = false
+
 # -----------------------------
 # FRAME SYNC
 # -----------------------------
@@ -95,12 +100,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 		elif anim == "jump_attack" and current_frame == 1:
 			_realizar_golpe()
 
-	if anim in ["attack","jump_attack","attack_2_hits","special_attack"] and current_frame == sprite.sprite_frames.get_frame_count(anim) - 1:
+	if anim in ["attack", "jump_attack", "attack_2_hits", "special_attack"] and current_frame == sprite.sprite_frames.get_frame_count(anim) - 1:
 		await get_tree().create_timer(0.05).timeout
 		is_attacking = false
 		special_attack_hit_done = false
-
-func _realizar_golpe() -> void:
-	attack_area.monitoring = true
-	await get_tree().create_timer(0.1).timeout
-	attack_area.monitoring = false

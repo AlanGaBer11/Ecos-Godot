@@ -554,6 +554,8 @@ animations = [{
 
 [node name="Manchas" type="CharacterBody2D"]
 script = ExtResource("1_48uvj")
+_max_salud = 15
+_damage = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -61)

@@ -22,9 +22,12 @@ func _ready() -> void:
 
 	attack_area.connect("body_entered", Callable(self, "_on_attack_area_body_entered"))
 	# sprite.connect("frame_changed", Callable(self, "_on_animated_sprite_2d_frame_changed"))
+	
 
-func _on_attack_area_body_entered(body: Node) -> void:
-	if is_attacking:
+	attack_area.monitoring = false
+
+func _on_attack_area_body_entered(body: Node) -> void:	
+	if is_attacking and body != self:
 		aplicar_dano(body)
 
 func _physics_process(delta: float) -> void:
@@ -46,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_pressed("ui_fire") and can_shoot:
 			_disparar()
 
-	if is_attacking:
+	if is_attacking or _is_taking_damage:
 		return
 
 	if not is_on_floor():
@@ -89,6 +92,18 @@ func _disparar() -> void:
 	current_attack_anim = "jump_ranged_attack" if not is_on_floor() else "ranged_attack"
 	sprite.play(current_attack_anim)
 
+func _realizar_golpe() -> void:
+	attack_area.monitoring = true
+	await get_tree().create_timer(0.1).timeout
+	attack_area.monitoring = false
+
+func _lanzar_proyectil() -> void:
+	if projectile_scene:
+		var projectile = projectile_scene.instantiate()
+		get_tree().current_scene.add_child(projectile)
+		projectile.global_position = spawn_point.global_position
+		projectile.set_direction(-1 if sprite.flip_h else 1)
+
 # -----------------------------
 # FRAME CHANGE ANIM SYNC
 # -----------------------------
@@ -108,21 +123,9 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 		elif anim == "jump_attack" and current_frame == 1:
 			_realizar_golpe()
 
-	if anim.ends_with("attack") and current_frame == sprite.sprite_frames.get_frame_count(anim) - 1:
+	if anim in ["attack","jump_attack","ranged_attack", "jump_ranged_attack", "special_attack"] and current_frame == sprite.sprite_frames.get_frame_count(anim) - 1:
 		await get_tree().create_timer(0.05).timeout
 		is_attacking = false
 		special_attack_hit_done = false
 		projectile_fired = false
 		can_shoot = true
-
-func _realizar_golpe() -> void:
-	attack_area.monitoring = true
-	await get_tree().create_timer(0.1).timeout
-	attack_area.monitoring = false
-
-func _lanzar_proyectil() -> void:
-	if projectile_scene:
-		var projectile = projectile_scene.instantiate()
-		get_tree().current_scene.add_child(projectile)
-		projectile.global_position = spawn_point.global_position
-		projectile.set_direction(-1 if sprite.flip_h else 1)

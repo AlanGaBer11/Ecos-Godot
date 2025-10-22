@@ -577,6 +577,8 @@ size = Vector2(97, 102)
 [node name="Tobio" type="CharacterBody2D"]
 script = ExtResource("1_d1of5")
 projectile_scene = ExtResource("2_70atu")
+_velocidad_base = 480.0
+_fuerza_salto_base = 460.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -60)
@@ -590,9 +592,11 @@ position = Vector2(-2.5, -51)
 shape = SubResource("RectangleShape2D_l8fqe")
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 position = Vector2(55, -34)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+visible = false
 shape = SubResource("CircleShape2D_70atu")
 
 [node name="ProyectilSpawn" type="Node2D" parent="."]

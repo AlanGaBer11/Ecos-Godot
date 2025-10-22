@@ -23,6 +23,9 @@ var _knockback_direction := 0                  # Dirección del retroceso (-1 ó
 # --------------------------------------------------------------------------
 func _ready() -> void:
 	_salud_actual = _max_salud
+	# Conecta la señal 
+	if sprite:
+		sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 # --------------------------------------------------------------------------
 # LÓGICA DE MOVIMIENTO BASE
@@ -31,30 +34,31 @@ func _physics_process(delta: float) -> void:
 	if not _esta_vivo:
 		return
 
-	# Evitar moverse mientras recibe daño
-	if _is_taking_damage:
-		velocity.x = move_toward(velocity.x, 0, delta * 800)
-		move_and_slide()
-		return
-
-	# 1. Aplicar gravedad
+	# 1. Aplicar gravedad (SIEMPRE, a menos que esté en el suelo)
 	if not is_on_floor():
 		velocity.y += _gravedad * delta
 	else:
-		_saltos_disponibles = 2 # Reinicia saltos al tocar el suelo
+		# Solo reinicia saltos si no está recibiendo daño
+		if not _is_taking_damage: 
+			_saltos_disponibles = 2 
 
-	# 2. Movimiento horizontal
-	var direccion_x: float = Input.get_axis("ui_left", "ui_right")
-	if direccion_x != 0.0:
-		velocity.x = direccion_x * _velocidad_base
+	# 2. Lógica de movimiento (Horizontal)
+	if _is_taking_damage:
+		# Mientras recibe daño, solo aplica fricción al knockback
+		velocity.x = move_toward(velocity.x, 0, delta * 800) 
 	else:
-		var desacel := _velocidad_base * 8.0 * delta
-		velocity.x = move_toward(velocity.x, 0.0, desacel)
+		# Movimiento horizontal normal (controlado por el jugador)
+		var direccion_x: float = Input.get_axis("ui_left", "ui_right")
+		if direccion_x != 0.0:
+			velocity.x = direccion_x * _velocidad_base
+		else:
+			var desacel := _velocidad_base * 8.0 * delta
+			velocity.x = move_toward(velocity.x, 0.0, desacel)
 
-	# 3. Salto
-	saltar()
+		# 3. Salto (solo si no está recibiendo daño)
+		saltar()
 
-	# 4. Movimiento
+	# 4. Movimiento (UNA SOLA VEZ al final)
 	move_and_slide()
 
 # --------------------------------------------------------------------------
@@ -91,14 +95,11 @@ func recibir_danio(cantidad: int, origen: Vector2 = Vector2.ZERO) -> void:
 		_is_taking_damage = true
 		_knockback_direction = -1 if origen.x > global_position.x else 1
 		velocity.x = 300 * _knockback_direction
-		velocity.y = -150
+		velocity.y = 0
 
-		if sprite and sprite.sprite_frames.has_animation("take_damage"):
+		if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("take_damage"):
+			sprite.sprite_frames.set_animation_loop("take_damage", false)
 			sprite.play("take_damage")
-			await sprite.animation_finished
-
-		_is_taking_damage = false
-		_knockback_direction = 0
 	else:
 		_salud_actual = 0
 		morir()
@@ -115,3 +116,10 @@ func morir() -> void:
 		await get_tree().create_timer(sprite.sprite_frames.get_frame_count("death") / sprite.speed).timeout
 
 	queue_free()
+	
+func _on_animation_finished() -> void:
+	# Solo nos importa si la animación que terminó fue "take_damage"
+	if sprite.animation == "take_damage":
+		_is_taking_damage = false
+		_knockback_direction = 0
+		print(name, " terminó animación de daño")
