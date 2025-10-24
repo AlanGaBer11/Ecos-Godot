@@ -1,0 +1,303 @@
+[gd_scene load_steps=20 format=3 uid="uid://iqhjrjibbuee"]
+
+[ext_resource type="Script" uid="uid://c5cycjkfa37fs" path="res://scripts/menus/SelectCharacter.gd" id="1_hpajs"]
+[ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="1_yfim6"]
+[ext_resource type="Script" uid="uid://cbnoomkwnqnbk" path="res://scripts/personajes/CharacterData.gd" id="2_vecer"]
+[ext_resource type="Texture2D" uid="uid://d1cx03087ljsf" path="res://assets/sprites/tobio/Tobio.png" id="3_pwdt5"]
+[ext_resource type="Texture2D" uid="uid://b7gts4rgd8wpj" path="res://assets/sprites/manchas/Manchas.png" id="4_ncgs6"]
+[ext_resource type="PackedScene" uid="uid://b04mlgqr6ym37" path="res://scenes/personajes/Tobio.tscn" id="4_x4aky"]
+[ext_resource type="PackedScene" uid="uid://doqv2fv5kxh1i" path="res://scenes/personajes/Manchas.tscn" id="6_togyk"]
+[ext_resource type="FontFile" uid="uid://de3kjs4g003bs" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="7_x4aky"]
+[ext_resource type="Texture2D" uid="uid://b3o4i6k8tcjxf" path="res://assets/icons/corazon.png" id="8_togyk"]
+[ext_resource type="Texture2D" uid="uid://bewnncp8hdanu" path="res://assets/icons/espada.png" id="10_jfgbk"]
+[ext_resource type="StyleBox" uid="uid://cp0c1dcko6l5q" path="res://assets/styles/ProgressBar.tres" id="10_wtdqw"]
+[ext_resource type="Texture2D" uid="uid://ckibjn0vtskny" path="res://assets/icons/rayo.png" id="11_8csta"]
+[ext_resource type="Texture2D" uid="uid://djieq8fkv2wn1" path="res://assets/icons/salto.png" id="13_wtdqw"]
+
+[sub_resource type="Resource" id="Resource_x4aky"]
+script = ExtResource("2_vecer")
+id = "Tobio"
+image = ExtResource("3_pwdt5")
+scene = ExtResource("4_x4aky")
+health = 10
+damage = 1
+speed = 480.0
+jump_power = 460.0
+description = "¡Rápido como el viento! Este gato inquieto 
+nunca se queda quieto. Sus saltos acrobáticos 
+lo sacan de cualquier apuro."
+metadata/_custom_type_script = "uid://cbnoomkwnqnbk"
+
+[sub_resource type="Resource" id="Resource_togyk"]
+script = ExtResource("2_vecer")
+id = "Manchas"
+image = ExtResource("4_ncgs6")
+scene = ExtResource("6_togyk")
+health = 15
+damage = 2
+speed = 400.0
+jump_power = 400.0
+description = "Fuerte y valiente, Manchas no le teme a nada. 
+Sus potentes zarpazos y aguante lo hacen 
+el guerrero perfecto."
+metadata/_custom_type_script = "uid://cbnoomkwnqnbk"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtdqw"]
+bg_color = Color(0.180392, 0.8, 0.443137, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anyim"]
+bg_color = Color(0.901961, 0.494118, 0.133333, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da6jg"]
+bg_color = Color(0.203922, 0.596078, 0.858824, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c43lp"]
+bg_color = Color(0.152941, 0.682353, 0.376471, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="SelectCharacter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+script = ExtResource("1_hpajs")
+Personajes = Array[ExtResource("2_vecer")]([SubResource("Resource_x4aky"), SubResource("Resource_togyk")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.368627, 0.439216, 0.443137, 1)
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -148.5
+offset_right = 226.0
+offset_bottom = 148.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 59
+
+[node name="NameLabel" type="Label" parent="MainLayout"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("7_x4aky")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="SpriteConainer" type="BoxContainer" parent="MainLayout"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="MainLayout/SpriteConainer"]
+scale = Vector2(10, 10)
+
+[node name="Spacer" type="HSeparator" parent="MainLayout"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CharacterStats" type="VBoxContainer" parent="MainLayout"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MainLayout/CharacterStats"]
+layout_mode = 2
+
+[node name="StatsContainer" type="VBoxContainer" parent="MainLayout/CharacterStats"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HealthContainer" type="HBoxContainer" parent="MainLayout/CharacterStats/StatsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HealthIcon" type="TextureRect" parent="MainLayout/CharacterStats/StatsContainer/HealthContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("8_togyk")
+stretch_mode = 5
+
+[node name="HealthLabel" type="Label" parent="MainLayout/CharacterStats/StatsContainer/HealthContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="MainLayout/CharacterStats/StatsContainer/HealthContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+theme_override_styles/background = ExtResource("10_wtdqw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wtdqw")
+max_value = 20.0
+step = 1.0
+show_percentage = false
+
+[node name="DamageContainer" type="HBoxContainer" parent="MainLayout/CharacterStats/StatsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="DamageIcon" type="TextureRect" parent="MainLayout/CharacterStats/StatsContainer/DamageContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("10_jfgbk")
+stretch_mode = 5
+
+[node name="DamageLabel" type="Label" parent="MainLayout/CharacterStats/StatsContainer/DamageContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="DamageBar" type="ProgressBar" parent="MainLayout/CharacterStats/StatsContainer/DamageContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+theme_override_styles/background = ExtResource("10_wtdqw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_anyim")
+max_value = 5.0
+step = 1.0
+show_percentage = false
+
+[node name="SpeedContainer" type="HBoxContainer" parent="MainLayout/CharacterStats/StatsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="SpeedIcon" type="TextureRect" parent="MainLayout/CharacterStats/StatsContainer/SpeedContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("11_8csta")
+stretch_mode = 5
+
+[node name="SpeedLabel" type="Label" parent="MainLayout/CharacterStats/StatsContainer/SpeedContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="SpeedBar" type="ProgressBar" parent="MainLayout/CharacterStats/StatsContainer/SpeedContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+theme_override_styles/background = ExtResource("10_wtdqw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_da6jg")
+min_value = 300.0
+max_value = 600.0
+value = 300.0
+show_percentage = false
+
+[node name="JumpContainer" type="HBoxContainer" parent="MainLayout/CharacterStats/StatsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="JumpIcon" type="TextureRect" parent="MainLayout/CharacterStats/StatsContainer/JumpContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("13_wtdqw")
+stretch_mode = 3
+
+[node name="JumpLabel" type="Label" parent="MainLayout/CharacterStats/StatsContainer/JumpContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="JumpBar" type="ProgressBar" parent="MainLayout/CharacterStats/StatsContainer/JumpContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+theme_override_styles/background = ExtResource("10_wtdqw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c43lp")
+min_value = 300.0
+max_value = 600.0
+step = 10.0
+value = 300.0
+show_percentage = false
+
+[node name="HSeparator2" type="HSeparator" parent="MainLayout/CharacterStats"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="MainLayout/CharacterStats"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="MainLayout"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 24
+text = "Seleccionar"
+
+[node name="PreviousButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -18.5
+offset_right = 140.0
+offset_bottom = 21.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 24
+text = "<"
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -18.5
+offset_right = -79.0
+offset_bottom = 21.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_yfim6")
+theme_override_font_sizes/font_size = 24
+text = ">"
+
+[connection signal="pressed" from="MainLayout/SelectButton" to="." method="_on_select_pressed"]
+[connection signal="pressed" from="PreviousButton" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_pressed"]

@@ -7,6 +7,7 @@ extends Control
 
 # Scenes
 @export var scene_level1: PackedScene = preload("res://scenes/niveles/Nivel_Bosque.tscn")
+@export var select_character: String = "res://scenes/menus/SelectCharacter.tscn"
 @export var scene_options_path: String = "res://scenes/menus/OptionsMenu.tscn"
 
 func _ready():
@@ -31,10 +32,10 @@ func _ready():
 func _on_play_pressed():
 	#_play_click()
 	# si tienes la ruta de escena en PackedScene exportado:
-	if scene_level1:
+	if select_character:
 		
 		SceneManager.is_game_paused = false  # Resetear el estado de pausa
-		get_tree().change_scene_to_file("res://scenes/niveles/Nivel_Bosque.tscn")
+		get_tree().change_scene_to_file("res://scenes/menus/SelectCharacter.tscn")
 	else:
 		push_error("No se encontró el nivel")
 

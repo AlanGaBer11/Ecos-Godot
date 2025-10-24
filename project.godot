@@ -19,6 +19,7 @@ config/icon="uid://dx76x1jduewd2"
 
 AudioManager="*res://scenes/objetos/AudioManager.tscn"
 SceneManager="*res://scripts/singleton/SceneManager.gd"
+CharacterManager="*res://scripts/singleton/CharacterManager.gd"
 
 [input]
 

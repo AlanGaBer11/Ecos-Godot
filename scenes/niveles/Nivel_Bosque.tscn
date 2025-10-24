@@ -1,20 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://ciix8hp0augjo"]
 
+[ext_resource type="Script" uid="uid://bq1xcdoknauag" path="res://scripts/niveles/NivelBosque.gd" id="1_x5yp2"]
 [ext_resource type="PackedScene" uid="uid://qt683vfk4pcp" path="res://scenes/menus/Fps.tscn" id="2_kispg"]
-[ext_resource type="PackedScene" uid="uid://b04mlgqr6ym37" path="res://scenes/personajes/Tobio.tscn" id="2_kxoys"]
 [ext_resource type="PackedScene" uid="uid://cmjkyy3to1my5" path="res://scenes/menus/PauseMenu.tscn" id="3_kxoys"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5i7ka"]
 
 [node name="NivelBosque" type="Node2D"]
+script = ExtResource("1_x5yp2")
 
-[node name="Tobio" parent="." instance=ExtResource("2_kxoys")]
-position = Vector2(66, 144)
+[node name="SpawnCharacter" type="Node2D" parent="."]
+position = Vector2(63, 142)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(75, 105)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(63, 145)

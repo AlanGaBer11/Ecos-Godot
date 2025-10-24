@@ -11,6 +11,7 @@ extends CharacterBody2D
 
 var _salud_actual: int                         # Salud actual
 var _saltos_disponibles: int = 2               # Para doble salto
+var _saltos_maximos: int = 2                   #
 var _gravedad: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _esta_vivo: bool = true                    # Estado del personaje
 var _is_taking_damage: bool = false            # Nuevo: control de recibir daño
@@ -23,6 +24,7 @@ var _knockback_direction := 0                  # Dirección del retroceso (-1 ó
 # --------------------------------------------------------------------------
 func _ready() -> void:
 	_salud_actual = _max_salud
+	_saltos_maximos = _saltos_disponibles
 	# Conecta la señal 
 	if sprite:
 		sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
@@ -40,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		# Solo reinicia saltos si no está recibiendo daño
 		if not _is_taking_damage: 
-			_saltos_disponibles = 2 
+			_saltos_disponibles = _saltos_maximos
 
 	# 2. Lógica de movimiento (Horizontal)
 	if _is_taking_damage:

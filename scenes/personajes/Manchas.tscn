@@ -554,6 +554,7 @@ animations = [{
 
 [node name="Manchas" type="CharacterBody2D"]
 script = ExtResource("1_48uvj")
+_velocidad_base = 400.0
 _max_salud = 15
 _damage = 3
 
@@ -561,7 +562,7 @@ _damage = 3
 position = Vector2(3, -61)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_khrxt")
-animation = &"idle"
+animation = &"attack_2_hits"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -574,3 +575,5 @@ position = Vector2(51, -44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_sxlia")
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
