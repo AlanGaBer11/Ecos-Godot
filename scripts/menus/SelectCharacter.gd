@@ -5,18 +5,18 @@ extends Control
 
 # Referencias a los labels de características
 @onready var name_label = $MainLayout/NameLabel
-@onready var health_label = $MainLayout/CharacterStats/StatsContainer/HealthContainer/HealthLabel
-@onready var damage_label = $MainLayout/CharacterStats/StatsContainer/DamageContainer/DamageLabel
-@onready var speed_label = $MainLayout/CharacterStats/StatsContainer/SpeedContainer/SpeedLabel
-@onready var jump_label = $MainLayout/CharacterStats/StatsContainer/JumpContainer/JumpLabel
+@onready var health_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/HealthContainer/HealthLabel
+@onready var damage_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/DamageContainer/DamageLabel
+@onready var speed_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/SpeedContainer/SpeedLabel
+@onready var jump_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/JumpContainer/JumpLabel
 
-@onready var description_label = $MainLayout/CharacterStats/DescriptionLabel
+@onready var description_label = $MainLayout/MarginContainer/CharacterStats/DescriptionLabel
 
 # Referencias a las barras de progreso
-@onready var health_bar = $MainLayout/CharacterStats/StatsContainer/HealthContainer/HealthBar
-@onready var damage_bar = $MainLayout/CharacterStats/StatsContainer/DamageContainer/DamageBar
-@onready var speed_bar = $MainLayout/CharacterStats/StatsContainer/SpeedContainer/SpeedBar
-@onready var jump_bar = $MainLayout/CharacterStats/StatsContainer/JumpContainer/JumpBar
+@onready var health_bar = $MainLayout/MarginContainer/CharacterStats/StatsContainer/HealthContainer/HealthBar
+@onready var damage_bar = $MainLayout/MarginContainer/CharacterStats/StatsContainer/DamageContainer/DamageBar
+@onready var speed_bar = $MainLayout/MarginContainer/CharacterStats/StatsContainer/SpeedContainer/SpeedBar
+@onready var jump_bar = $MainLayout/MarginContainer/CharacterStats/StatsContainer/JumpContainer/JumpBar
 
 var cont: int = 0
 
