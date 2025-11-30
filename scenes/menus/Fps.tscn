@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://qt683vfk4pcp"]
-
-[ext_resource type="Script" uid="uid://du2vcuus2jtnr" path="res://scripts/menus/Fps.gd" id="1_3jm3r"]
+[gd_scene format=3 uid="uid://qt683vfk4pcp"]
 
 [node name="PruebaFps" type="Control"]
 layout_mode = 3
@@ -12,13 +10,3 @@ offset_left = -27.408
 offset_top = -27.104
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="FpsLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -1.0
-offset_bottom = 23.0
-grow_horizontal = 0
-script = ExtResource("1_3jm3r")

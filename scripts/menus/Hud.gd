@@ -3,6 +3,7 @@ class_name HUD
 extends CanvasLayer
 
 @onready var indicador_vida: IndicadorVida = $MarginContainer/VBoxContainer/IndicadorVida
+@onready var fps_counter: FPSCounter = $FpsCounter
 var jugador: Personaje = null
 
 func _ready() -> void:
@@ -13,7 +14,7 @@ func _ready() -> void:
 # Busca y conecta al jugador
 func _conectar_jugador() -> void:
 	# Buscar el jugador en la escena (puedes ajustar esto según tu estructura)
-	jugador = get_tree().get_first_node_in_group("personajes")
+	jugador = get_tree().get_first_node_in_group("jugador")
 	
 	if not jugador:
 		# Si no está en un grupo, buscar por tipo

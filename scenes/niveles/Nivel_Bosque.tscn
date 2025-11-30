@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciix8hp0augjo"]
+[gd_scene load_steps=6 format=3 uid="uid://ciix8hp0augjo"]
 
 [ext_resource type="Script" uid="uid://bq1xcdoknauag" path="res://scripts/niveles/NivelBosque.gd" id="1_x5yp2"]
-[ext_resource type="PackedScene" uid="uid://qt683vfk4pcp" path="res://scenes/menus/Fps.tscn" id="2_kispg"]
 [ext_resource type="PackedScene" uid="uid://2wegv7w6pfq8" path="res://scenes/personajes/Ramon.tscn" id="2_x5yp2"]
 [ext_resource type="PackedScene" uid="uid://cmjkyy3to1my5" path="res://scenes/menus/PauseMenu.tscn" id="3_kxoys"]
 [ext_resource type="PackedScene" uid="uid://bya36iv3r8cox" path="res://scenes/menus/HUD.tscn" id="5_jwmyu"]
@@ -31,8 +30,6 @@ position = Vector2(63, 145)
 shape = SubResource("WorldBoundaryShape2D_5i7ka")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="FPS" parent="CanvasLayer" instance=ExtResource("2_kispg")]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_kxoys")]
 process_mode = 1
