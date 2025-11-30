@@ -20,6 +20,7 @@ config/icon="uid://dx76x1jduewd2"
 AudioManager="*res://scenes/objetos/AudioManager.tscn"
 SceneManager="*res://scripts/singleton/SceneManager.gd"
 CharacterManager="*res://scripts/singleton/CharacterManager.gd"
+LanguageManager="*res://scripts/singleton/LanguageManager.gd"
 
 [input]
 
@@ -75,6 +76,11 @@ ui_fire={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":4,"axis_value":1.0,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/translate/Dialogos.en.translation", "res://assets/translate/Dialogos.es.translation", "res://assets/translate/Dialogos.pt.translation")
+locale/locale_filter_mode=0
 
 [rendering]
 

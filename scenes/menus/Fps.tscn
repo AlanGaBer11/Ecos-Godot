@@ -15,9 +15,10 @@ grow_vertical = 2
 
 [node name="FpsLabel" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.035
-anchor_bottom = 0.036
-offset_right = -0.110001
-offset_bottom = -0.184002
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
 script = ExtResource("1_3jm3r")

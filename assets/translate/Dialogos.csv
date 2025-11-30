@@ -1,0 +1,18 @@
+﻿keys,es,en,pt
+MainTitle,Ecos,Ecos,Ecos
+PlayButton,Jugar,Start,Jogar
+OptionsButton,Opciones,Options,Opções
+ExitButton,Salir,Exit,Sair
+OptionsTitle,Opciones,Options,Opções
+LabelVol,Volumen de la Música,Music Volume,Volume da Música
+SfxLabel,Volumen de Efectos,SFX Volume,Volume dos Efeitos
+FullScreen,Pantalla Completa,Full Screen,Tela Cheia
+SaveButton,Guardar,Save,Salvar
+BackButton,Volver,Back,Voltar
+PauseTitle,Juego en Pausa,Game Paused,Jogo Pausado
+ContinueButton,Continuar,Continue,Continuar
+SelectButton,Seleccionar,Select,Selecionar
+HealthLabel,Vida,Health,Vida
+DamageLabel,Daño,Damage,Dano
+SpeedLabel,Velocidad,Speed,Velocidade
+JumpLabel,Salto,Jump,Pulo

@@ -26,6 +26,7 @@ func _ready():
 	#credits_btn.pressed.connect(_on_credits_pressed)
 	exit_btn.pressed.connect(_on_exit_pressed)
 	
+	
 	# Setear primer foco para navegación con teclado/joy
 	play_btn.grab_focus()
 

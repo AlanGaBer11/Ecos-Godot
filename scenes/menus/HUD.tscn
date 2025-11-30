@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bya36iv3r8cox"]
+
+[ext_resource type="Script" uid="uid://y5cvlx3snh1v" path="res://scripts/objetos/IndicadorVida.gd" id="1_jyvo4"]
+[ext_resource type="Script" uid="uid://ccsqc1et2jhcj" path="res://scripts/menus/Hud.gd" id="1_sf33l"]
+[ext_resource type="Texture2D" uid="uid://ci7b3xfulq8v7" path="res://assets/sprites/objetos/vida/heart.png" id="2_v3b6h"]
+[ext_resource type="Texture2D" uid="uid://c12pfg8wxaqpa" path="res://assets/sprites/objetos/vida/background.png" id="3_dhgmt"]
+[ext_resource type="Texture2D" uid="uid://5uqptuf3e2th" path="res://assets/sprites/objetos/vida/border.png" id="4_mm7it"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_sf33l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="IndicadorVida" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_jyvo4")
+sprite_heart = ExtResource("2_v3b6h")
+sprite_background = ExtResource("3_dhgmt")
+sprite_border = ExtResource("4_mm7it")

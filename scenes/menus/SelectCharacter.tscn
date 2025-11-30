@@ -154,6 +154,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yfim6")
 theme_override_font_sizes/font_size = 18
+text = "HealthLabel"
 horizontal_alignment = 1
 
 [node name="HealthBar" type="ProgressBar" parent="MainLayout/MarginContainer/CharacterStats/StatsContainer/HealthContainer"]
@@ -181,6 +182,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yfim6")
 theme_override_font_sizes/font_size = 18
+text = "DamageLabel"
 horizontal_alignment = 1
 
 [node name="DamageBar" type="ProgressBar" parent="MainLayout/MarginContainer/CharacterStats/StatsContainer/DamageContainer"]
@@ -208,6 +210,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yfim6")
 theme_override_font_sizes/font_size = 18
+text = "SpeedLabel"
 horizontal_alignment = 1
 
 [node name="SpeedBar" type="ProgressBar" parent="MainLayout/MarginContainer/CharacterStats/StatsContainer/SpeedContainer"]
@@ -236,6 +239,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yfim6")
 theme_override_font_sizes/font_size = 18
+text = "JumpLabel"
 horizontal_alignment = 1
 
 [node name="JumpBar" type="ProgressBar" parent="MainLayout/MarginContainer/CharacterStats/StatsContainer/JumpContainer"]
@@ -264,7 +268,7 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yfim6")
 theme_override_font_sizes/font_size = 24
-text = "Seleccionar"
+text = "SelectButton"
 
 [node name="PreviousButton" type="Button" parent="."]
 layout_mode = 1

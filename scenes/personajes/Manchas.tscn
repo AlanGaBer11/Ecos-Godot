@@ -549,31 +549,32 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujvab"]
+size = Vector2(65, 90)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxlia"]
 
-[node name="Manchas" type="CharacterBody2D"]
+[node name="Manchas" type="CharacterBody2D" groups=["personajes"]]
 script = ExtResource("1_48uvj")
 _velocidad_base = 400.0
 _max_salud = 15
 _damage = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -61)
+position = Vector2(0, -60)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_khrxt")
-animation = &"attack_2_hits"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -51)
-scale = Vector2(5, 5)
+position = Vector2(-7.5, -45)
 shape = SubResource("RectangleShape2D_ujvab")
 
 [node name="AttackArea" type="Area2D" parent="."]
-position = Vector2(51, -44)
+position = Vector2(55, -34)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_sxlia")
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

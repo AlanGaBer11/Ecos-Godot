@@ -5,11 +5,6 @@ extends Control
 
 # Referencias a los labels de características
 @onready var name_label = $MainLayout/NameLabel
-@onready var health_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/HealthContainer/HealthLabel
-@onready var damage_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/DamageContainer/DamageLabel
-@onready var speed_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/SpeedContainer/SpeedLabel
-@onready var jump_label = $MainLayout/MarginContainer/CharacterStats/StatsContainer/JumpContainer/JumpLabel
-
 @onready var description_label = $MainLayout/MarginContainer/CharacterStats/DescriptionLabel
 
 # Referencias a las barras de progreso
@@ -29,10 +24,6 @@ func update_character_display() -> void:
 	
 	# Actualizar las características
 	name_label.text = current_character.id
-	health_label.text = "Vida"
-	damage_label.text = "Daño"
-	speed_label.text = "Velocidad"
-	jump_label.text = "Salto"
 	description_label.text = current_character.description
 	
 	# Actualizar barras de progreso con valores directos

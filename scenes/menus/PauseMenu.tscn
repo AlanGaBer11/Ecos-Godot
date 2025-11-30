@@ -44,9 +44,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="PauseTitle" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Juego en pausa"
+text = "PauseTitle"
 label_settings = SubResource("LabelSettings_i7533")
 horizontal_alignment = 1
 
@@ -54,23 +54,23 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="ContinueBtn" type="Button" parent="VBoxContainer/ButtonContainer"]
+[node name="ContinueButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_i7533")
 theme_override_font_sizes/font_size = 24
-text = "Continuar"
+text = "ContinueButton"
 
-[node name="OptionsBtn" type="Button" parent="VBoxContainer/ButtonContainer"]
+[node name="OptionsButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_i7533")
 theme_override_font_sizes/font_size = 24
-text = "Opciones"
+text = "OptionsButton"
 
-[node name="ExitBtn" type="Button" parent="VBoxContainer/ButtonContainer"]
+[node name="ExitButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_i7533")
 theme_override_font_sizes/font_size = 24
-text = "Salir"
+text = "ExitButton"
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 title = ""

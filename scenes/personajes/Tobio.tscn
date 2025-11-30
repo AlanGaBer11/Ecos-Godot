@@ -549,7 +549,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"special_attack",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -570,11 +570,11 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8fqe"]
-size = Vector2(97, 102)
+size = Vector2(65, 90)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70atu"]
 
-[node name="Tobio" type="CharacterBody2D"]
+[node name="Tobio" type="CharacterBody2D" groups=["personajes"]]
 script = ExtResource("1_d1of5")
 projectile_scene = ExtResource("2_70atu")
 _velocidad_base = 480.0
@@ -584,21 +584,25 @@ _fuerza_salto_base = 460.0
 position = Vector2(0, -60)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_jngty")
-animation = &"idle"
+animation = &"take_damage"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.5, -51)
+position = Vector2(-7.5, -45)
 shape = SubResource("RectangleShape2D_l8fqe")
 
 [node name="AttackArea" type="Area2D" parent="."]
 position = Vector2(55, -34)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-visible = false
+shape = SubResource("CircleShape2D_70atu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-121, 0)
 shape = SubResource("CircleShape2D_70atu")
 
 [node name="ProyectilSpawn" type="Node2D" parent="."]
 position = Vector2(54, -48)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

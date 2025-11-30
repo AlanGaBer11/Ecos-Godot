@@ -45,7 +45,7 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="MainTitle" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -62,19 +62,19 @@ theme_override_constants/separation = 30
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tyyoy")
 theme_override_font_sizes/font_size = 24
-text = "Jugar"
+text = "PlayButton"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tyyoy")
 theme_override_font_sizes/font_size = 24
-text = "Opciones"
+text = "OptionsButton"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_tyyoy")
 theme_override_font_sizes/font_size = 24
-text = "Salir"
+text = "ExitButton"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 autoplay = true

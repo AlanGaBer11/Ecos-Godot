@@ -1,8 +1,8 @@
 extends Control 
 
-@onready var continue_btn = $VBoxContainer/ButtonContainer/ContinueBtn 
-@onready var options_btn = $VBoxContainer/ButtonContainer/OptionsBtn 
-@onready var exit_btn = $VBoxContainer/ButtonContainer/ExitBtn 
+@onready var continue_btn = $VBoxContainer/ButtonContainer/ContinueButton
+@onready var options_btn = $VBoxContainer/ButtonContainer/OptionsButton
+@onready var exit_btn = $VBoxContainer/ButtonContainer/ExitButton
 @onready var confirm_dialog = $ConfirmationDialog 
 
 

@@ -52,16 +52,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 
-[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+[node name="OptionsTitle" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "OPCIONES"
+text = "OptionsTitle"
 label_settings = SubResource("LabelSettings_fd6x8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelVol" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "Volumen de la música"
+text = "LabelVol"
 label_settings = SubResource("LabelSettings_dfv8g")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -79,7 +79,7 @@ value = 50.0
 
 [node name="SfxLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "Volumen efectos"
+text = "SfxLabel"
 label_settings = SubResource("LabelSettings_iy18p")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -99,8 +99,11 @@ value = 50.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_dfv8g")
 theme_override_font_sizes/font_size = 20
-text = "Pantalla completa"
+text = "FullScreen"
 alignment = 1
+
+[node name="LanguageSelector" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -111,10 +114,10 @@ theme_override_constants/separation = 30
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_dfv8g")
 theme_override_font_sizes/font_size = 24
-text = "Guardar"
+text = "SaveButton"
 
-[node name="ExitButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="BackButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_dfv8g")
 theme_override_font_sizes/font_size = 24
-text = "Volver"
+text = "BackButton"

@@ -19,8 +19,7 @@ func _ready() -> void:
 	_saltos_disponibles = 1
 	super._ready()
 	
-	attack_area.connect("body_entered", Callable(self, "_on_attack_area_body_entered"))
-	# sprite.connect("frame_changed", Callable(self, "_on_animated_sprite_2d_frame_changed"))
+	attack_area.monitoring = false
 
 func _on_attack_area_body_entered(body: Node) -> void:
 	if is_attacking and body != self:

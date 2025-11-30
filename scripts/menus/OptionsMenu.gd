@@ -5,8 +5,9 @@ extends Control
 @onready var music_label  : Label = $Panel/VBoxContainer/MucisBoxContainer/LabelMusic
 @onready var sfx_label    : Label = $Panel/VBoxContainer/SfxBoxContainer/LabelSfx
 @onready var fullscreen_cb: CheckBox = $Panel/VBoxContainer/FullScreen
+@onready var language_selector: OptionButton = $Panel/VBoxContainer/LanguageSelector
 @onready var save_btn     : Button = $Panel/VBoxContainer/HBoxContainer/SaveButton
-@onready var back_btn     : Button = $Panel/VBoxContainer/HBoxContainer/ExitButton
+@onready var back_btn     : Button = $Panel/VBoxContainer/HBoxContainer/BackButton
 
 const CONFIG_PATH: String = "user://settings.cfg"
 const SECTION: String = "audio"
@@ -32,6 +33,9 @@ func _ready() -> void:
 	sfx_slider.value_changed.connect(_on_sfx_slider_changed)
 	save_btn.pressed.connect(_on_save_pressed)
 	back_btn.pressed.connect(_on_back_pressed)
+	
+	# --- Configurar selector de idioma ---
+	_setup_language_selector()
 	
 	music_slider.grab_focus()
 
@@ -90,6 +94,9 @@ func _save_config() -> void:
 	cfg.set_value(SECTION, "sfx_volume", int(sfx_slider.value))
 	cfg.set_value(SECTION, "fullscreen", fullscreen_cb.button_pressed)
 	
+	# Guardar idioma actual
+	cfg.set_value("general", "language", LanguageManager.current_language)
+	
 	cfg.save(CONFIG_PATH)
 	print("Configuración guardada")
 
@@ -106,3 +113,26 @@ func _load_fullscreen_config() -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		fullscreen_cb.button_pressed = false
+
+# --- Selector de idioma ---
+func _setup_language_selector() -> void:
+	language_selector.clear()
+	
+	language_selector.add_item("Español")
+	language_selector.set_item_metadata(0, "es")
+	language_selector.add_item("English")
+	language_selector.set_item_metadata(1, "en")
+	language_selector.add_item("Português")
+	language_selector.set_item_metadata(2, "pt")
+
+	var current_lang: String = LanguageManager.current_language
+	for i in range(language_selector.item_count):
+		if language_selector.get_item_metadata(i) == current_lang:
+			language_selector.select(i)
+			break
+
+	language_selector.item_selected.connect(_on_language_selected)
+
+func _on_language_selected(index: int) -> void:
+	var lang_code: String = language_selector.get_item_metadata(index)
+	LanguageManager.change_language(lang_code)

@@ -1,21 +1,26 @@
+# Personaje.gd
 class_name Personaje
 extends CharacterBody2D
+
+# NUEVA SEÑAL para comunicar cambios de vida
+signal vida_cambio(vida_actual: int, vida_maxima: int)
 
 # --------------------------------------------------------------------------
 # ENCAPSULAMIENTO
 # --------------------------------------------------------------------------
-@export var _velocidad_base: float = 300.0    # Velocidad horizontal
-@export var _fuerza_salto_base: float = 400.0 # Fuerza de salto
-@export var _max_salud: int = 10              # Salud máxima
-@export var _damage: int = 1                  # Daño base del personaje
+@export var _velocidad_base: float = 300.0
+@export var _fuerza_salto_base: float = 400.0
+@export var _max_salud: int = 10
+@export var _damage: int = 1
+@export var es_jugador: bool = true
 
-var _salud_actual: int                         # Salud actual
-var _saltos_disponibles: int = 2               # Para doble salto
-var _saltos_maximos: int = 2                   #
+var _salud_actual: int
+var _saltos_disponibles: int = 2
+var _saltos_maximos: int = 2
 var _gravedad: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var _esta_vivo: bool = true                    # Estado del personaje
-var _is_taking_damage: bool = false            # Nuevo: control de recibir daño
-var _knockback_direction := 0                  # Dirección del retroceso (-1 ó 1)
+var _esta_vivo: bool = true
+var _is_taking_damage: bool = false
+var _knockback_direction := 0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -25,9 +30,11 @@ var _knockback_direction := 0                  # Dirección del retroceso (-1 ó
 func _ready() -> void:
 	_salud_actual = _max_salud
 	_saltos_maximos = _saltos_disponibles
-	# Conecta la señal 
 	if sprite:
 		sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	
+	# NUEVO: Emitir vida inicial
+	vida_cambio.emit(_salud_actual, _max_salud)
 
 # --------------------------------------------------------------------------
 # LÓGICA DE MOVIMIENTO BASE
@@ -36,20 +43,28 @@ func _physics_process(delta: float) -> void:
 	if not _esta_vivo:
 		return
 
-	# 1. Aplicar gravedad (SIEMPRE, a menos que esté en el suelo)
+	# 1. Aplicar gravedad
+	aplicar_gravedad(delta)
+
+	# 2. Movimiento y salto (solo si es jugador)
+	if es_jugador and not _is_taking_damage:
+		manejar_movimiento(delta)
+		manejar_salto()
+
+	# 3. Mover personaje
+	move_and_slide()
+
+func aplicar_gravedad(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += _gravedad * delta
 	else:
-		# Solo reinicia saltos si no está recibiendo daño
-		if not _is_taking_damage: 
+		if not _is_taking_damage:
 			_saltos_disponibles = _saltos_maximos
 
-	# 2. Lógica de movimiento (Horizontal)
+func manejar_movimiento(delta: float) -> void:
 	if _is_taking_damage:
-		# Mientras recibe daño, solo aplica fricción al knockback
-		velocity.x = move_toward(velocity.x, 0, delta * 800) 
+		velocity.x = move_toward(velocity.x, 0, delta * 800)
 	else:
-		# Movimiento horizontal normal (controlado por el jugador)
 		var direccion_x: float = Input.get_axis("ui_left", "ui_right")
 		if direccion_x != 0.0:
 			velocity.x = direccion_x * _velocidad_base
@@ -57,11 +72,8 @@ func _physics_process(delta: float) -> void:
 			var desacel := _velocidad_base * 8.0 * delta
 			velocity.x = move_toward(velocity.x, 0.0, desacel)
 
-		# 3. Salto (solo si no está recibiendo daño)
-		saltar()
-
-	# 4. Movimiento (UNA SOLA VEZ al final)
-	move_and_slide()
+func manejar_salto() -> void:
+	saltar()
 
 # --------------------------------------------------------------------------
 # MÉTODOS POLIMÓRFICOS
@@ -77,11 +89,20 @@ func saltar() -> void:
 func curar(cantidad: int) -> void:
 	_salud_actual = min(_salud_actual + cantidad, _max_salud)
 	print("Salud actualizada a: ", _salud_actual)
+	# NUEVO: Emitir cambio de vida
+	vida_cambio.emit(_salud_actual, _max_salud)
+
+# NUEVO: Getter para la salud actual (para UI)
+func get_salud_actual() -> int:
+	return _salud_actual
+
+# NUEVO: Getter para la salud máxima (para UI)
+func get_max_salud() -> int:
+	return _max_salud
 
 # --------------------------------------------------------------------------
 # SISTEMA DE DAÑO
 # --------------------------------------------------------------------------
-# Aplica daño a otro objetivo
 func aplicar_dano(objetivo: Node) -> void:
 	if objetivo and objetivo.has_method("recibir_danio"):
 		objetivo.recibir_danio(_damage, global_position)
@@ -91,7 +112,11 @@ func recibir_danio(cantidad: int, origen: Vector2 = Vector2.ZERO) -> void:
 		return
 
 	_salud_actual -= cantidad
+	_salud_actual = clamp(_salud_actual, 0, _max_salud)
 	print(name, " recibió ", cantidad, " de daño. Salud restante: ", _salud_actual)
+	
+	# NUEVO: Emitir cambio de vida
+	vida_cambio.emit(_salud_actual, _max_salud)
 
 	if _salud_actual > 0:
 		_is_taking_damage = true
@@ -113,12 +138,20 @@ func morir() -> void:
 	_esta_vivo = false
 	print(name, " ha sido derrotado.")
 
-	if sprite and sprite.sprite_frames.has_animation("death"):
+	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("death"):
+		sprite.sprite_frames.set_animation_loop("death", false)
 		sprite.play("death")
-		await get_tree().create_timer(sprite.sprite_frames.get_frame_count("death") / sprite.speed).timeout
+		# Calcular duración basándose en frames y FPS de la animación
+		var frame_count = sprite.sprite_frames.get_frame_count("death")
+		var fps = sprite.sprite_frames.get_animation_speed("death")
+		var duration = frame_count / fps if fps > 0 else 1.0
+		await get_tree().create_timer(duration).timeout
+	else:
+		# Si no hay animación de muerte, esperar un momento
+		await get_tree().create_timer(0.5).timeout
 
 	queue_free()
-	
+
 func _on_animation_finished() -> void:
 	# Solo nos importa si la animación que terminó fue "take_damage"
 	if sprite.animation == "take_damage":
