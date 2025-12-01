@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://4ivjc3anyemb"]
+
+[ext_resource type="Texture2D" uid="uid://ctvn7dw6gvqct" path="res://assets/sprites/objetos/skull.png" id="1_dxt3o"]
+[ext_resource type="Script" uid="uid://ctqig070t37f3" path="res://scripts/menus/DeathScreen.gd" id="1_kewue"]
+[ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="1_yl087"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kewue"]
+color = Color(0.862745, 0.14902, 0.14902, 1)
+
+[node name="DeathScreen" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kewue")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -245.5
+offset_right = 210.0
+offset_bottom = 245.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="spacer" type="Control" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SkullSprite" type="TextureRect" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_dxt3o")
+stretch_mode = 1
+
+[node name="DeathText" type="Label" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.862745, 0.14902, 0.14902, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_yl087")
+theme_override_font_sizes/font_size = 72
+text = "HAS MUERTO"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/CenterContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_kewue")
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ReintentarButton" type="Button" parent="Control/CenterContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yl087")
+theme_override_font_sizes/font_size = 24
+text = "Reintentar"
+
+[node name="MenuButton" type="Button" parent="Control/CenterContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yl087")
+theme_override_font_sizes/font_size = 24
+text = "Menú Principal"
+
+[node name="ExitButton" type="Button" parent="Control/CenterContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yl087")
+theme_override_font_sizes/font_size = 24
+text = "ExitButton"

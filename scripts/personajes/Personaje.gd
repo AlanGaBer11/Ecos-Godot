@@ -23,6 +23,7 @@ var _is_taking_damage: bool = false
 var _knockback_direction := 0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+var death_screen_scene = preload("res://scenes/menus/DeathScreen.tscn")
 
 # --------------------------------------------------------------------------
 # CICLO DE VIDA
@@ -137,6 +138,10 @@ func morir() -> void:
 
 	_esta_vivo = false
 	print(name, " ha sido derrotado.")
+	
+	# Desactivar físicas y controles
+	set_physics_process(false)
+	set_process_input(false)
 
 	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("death"):
 		sprite.sprite_frames.set_animation_loop("death", false)
@@ -149,8 +154,18 @@ func morir() -> void:
 	else:
 		# Si no hay animación de muerte, esperar un momento
 		await get_tree().create_timer(0.5).timeout
-
-	queue_free()
+	
+	# Mostrar pantalla de muerte
+	var death_screen = death_screen_scene.instantiate()
+	get_tree().current_scene.add_child(death_screen)
+	
+	# Pausar el juego
+	get_tree().paused = true
+	death_screen.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# Ocultar el personaje en lugar de eliminarlo
+	hide()
+	# NO uses queue_free() aquí, porque al reintentar se recarga la escena completa
 
 func _on_animation_finished() -> void:
 	# Solo nos importa si la animación que terminó fue "take_damage"
