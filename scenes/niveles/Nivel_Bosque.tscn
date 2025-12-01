@@ -1,11 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciix8hp0augjo"]
+[gd_scene load_steps=7 format=3 uid="uid://ciix8hp0augjo"]
 
 [ext_resource type="Script" uid="uid://bq1xcdoknauag" path="res://scripts/niveles/NivelBosque.gd" id="1_x5yp2"]
 [ext_resource type="PackedScene" uid="uid://2wegv7w6pfq8" path="res://scenes/personajes/Ramon.tscn" id="2_x5yp2"]
 [ext_resource type="PackedScene" uid="uid://cmjkyy3to1my5" path="res://scenes/menus/PauseMenu.tscn" id="3_kxoys"]
-[ext_resource type="PackedScene" uid="uid://bya36iv3r8cox" path="res://scenes/menus/HUD.tscn" id="5_jwmyu"]
+[ext_resource type="PackedScene" uid="uid://bya36iv3r8cox" path="res://scenes/hud/HUD.tscn" id="5_jwmyu"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5i7ka"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x5yp2"]
+normal = Vector2(-1, 0)
 
 [node name="NivelBosque" type="Node2D"]
 script = ExtResource("1_x5yp2")
@@ -15,9 +18,6 @@ position = Vector2(-300, 142)
 
 [node name="Ramon" parent="." instance=ExtResource("2_x5yp2")]
 position = Vector2(300, 142)
-_fuerza_salto_base = null
-_max_salud = null
-_damage = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(75, 105)
@@ -28,6 +28,12 @@ position = Vector2(0, -3)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(63, 145)
 shape = SubResource("WorldBoundaryShape2D_5i7ka")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(426, 108)
+shape = SubResource("WorldBoundaryShape2D_x5yp2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
