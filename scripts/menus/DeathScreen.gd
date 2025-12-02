@@ -6,6 +6,9 @@ extends Control
 @onready var button_reintentar = $CenterContainer/VBoxContainer/ButtonsContainer/ReintentarButton
 @onready var button_menu = $CenterContainer/VBoxContainer/ButtonsContainer/MenuButton
 @onready var button_salir = $CenterContainer/VBoxContainer/ButtonsContainer/ExitButton
+@onready var death_sound = $"../Sounds/DeathSound"
+@onready var select_sound = $"../Sounds/SelectSound"
+@onready var confirm_sound = $"../Sounds/ConfirmSound"
 
 var buttons = []
 var current_button = 0
@@ -13,6 +16,10 @@ var current_button = 0
 func _ready():
 		# Asegurar que ocupe toda la pantalla
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	
+	# Reproducir sonido de muerte al aparecer
+	if death_sound and death_sound.stream:
+		death_sound.play()
 	
 	# Ocultar todo al inicio
 	modulate.a = 0
@@ -139,15 +146,12 @@ func _fade_out_and_go_to_menu():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
 	await tween.finished
-	# Cambia "res://menu.tscn" por la ruta de tu escena de menú
-	get_tree().change_scene_to_file("res://menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
 
 func _play_select_sound():
-	# Aquí puedes agregar tu sonido de selección
-	# $SelectSound.play()
-	pass
+	if select_sound and select_sound.stream:
+		select_sound.play()
 
 func _play_confirm_sound():
-	# Aquí puedes agregar tu sonido de confirmación
-	# $ConfirmSound.play()
-	pass
+	if confirm_sound and confirm_sound.stream:
+		confirm_sound.play()

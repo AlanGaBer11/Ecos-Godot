@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://4ivjc3anyemb"]
+[gd_scene load_steps=8 format=3 uid="uid://4ivjc3anyemb"]
 
 [ext_resource type="Texture2D" uid="uid://ctvn7dw6gvqct" path="res://assets/sprites/objetos/skull.png" id="1_dxt3o"]
 [ext_resource type="Script" uid="uid://ctqig070t37f3" path="res://scripts/menus/DeathScreen.gd" id="1_kewue"]
 [ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="1_yl087"]
+[ext_resource type="AudioStream" uid="uid://bat824afqpe77" path="res://assets/audio/DeathSound.mp3" id="4_37k8u"]
+[ext_resource type="AudioStream" uid="uid://cdb4tvdcfba1y" path="res://assets/audio/SelectSound.ogg" id="5_3oclr"]
+[ext_resource type="AudioStream" uid="uid://cxcymdru8tj3s" path="res://assets/audio/ConfirmSound.mp3" id="6_d3pbu"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_kewue"]
 color = Color(0.862745, 0.14902, 0.14902, 1)
@@ -59,6 +62,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.862745, 0.14902, 0.14902, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("1_yl087")
 theme_override_font_sizes/font_size = 72
 text = "HAS MUERTO"
@@ -93,3 +97,18 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yl087")
 theme_override_font_sizes/font_size = 24
 text = "ExitButton"
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_37k8u")
+bus = &"Music"
+parameters/looping = true
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_3oclr")
+bus = &"SFX"
+
+[node name="ConfirmSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_d3pbu")
+bus = &"SFX"

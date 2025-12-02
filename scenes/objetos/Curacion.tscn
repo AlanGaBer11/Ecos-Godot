@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj6c2uik0ddmo"]
+
+[ext_resource type="Script" uid="uid://4rl8i5ln0fuf" path="res://scripts/objetos/ObjetoCuracion.gd" id="1_jtw18"]
+[ext_resource type="Texture2D" uid="uid://bsarurehjxfca" path="res://assets/sprites/objetos/vida/Royal Heart.png" id="1_myrix"]
+[ext_resource type="AudioStream" uid="uid://dt4xwlalpw43s" path="res://assets/audio/CuracionSound.mp3" id="2_hhny2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myrix"]
+atlas = ExtResource("1_myrix")
+region = Rect2(0, 0, 20.727, 21)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_myrix"]
+radius = 20.025
+
+[node name="Curacion" type="Area2D"]
+script = ExtResource("1_jtw18")
+sonido_recoleccion = ExtResource("2_hhny2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_myrix")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_myrix")
