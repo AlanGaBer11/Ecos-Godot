@@ -37,6 +37,9 @@ var death_screen_scene = preload("res://scenes/menus/DeathScreen.tscn")
 # CICLO DE VIDA
 # --------------------------------------------------------------------------
 func _ready() -> void:
+	# NUEVO: Pasar el nombre del personaje al inicializar
+	GameManager.inicializar_vida(_max_salud, name)  # Pasar "Tobio" o "Manchas"
+	
 	# Cargar vida guardada del GameManager
 	if GameManager.obtener_vida() > 0:
 		_salud_actual = GameManager.obtener_vida()
@@ -47,9 +50,10 @@ func _ready() -> void:
 	if sprite:
 		sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	
-	# NUEVO: Emitir vida inicial
+	# Emitir vida inicial
 	vida_cambio.emit(_salud_actual, _max_salud)
-	print(name, " iniciado con vida: ", _salud_actual)
+	print(name, " iniciado con vida: ", _salud_actual, "/", _max_salud)
+	print(name, " iniciado con vida: ", _salud_actual, "/", _max_salud)
 
 # --------------------------------------------------------------------------
 # LÓGICA DE MOVIMIENTO BASE

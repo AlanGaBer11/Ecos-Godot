@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://ciix8hp0augjo"]
+[gd_scene load_steps=129 format=4 uid="uid://ciix8hp0augjo"]
 
 [ext_resource type="Script" uid="uid://bq1xcdoknauag" path="res://scripts/niveles/NivelBosque.gd" id="1_x5yp2"]
 [ext_resource type="Texture2D" uid="uid://d0gmmuf7rgecq" path="res://assets/niveles/nivel1/Background/sky.png" id="2_x5yp2"]
@@ -61,6 +61,7 @@
 [ext_resource type="PackedScene" uid="uid://dkqfp738k7u6w" path="res://scenes/enemigos/SlimeGreen.tscn" id="51_xvp1p"]
 [ext_resource type="PackedScene" uid="uid://roq5c2yq6d2p" path="res://scenes/enemigos/SlimePurple.tscn" id="52_h3qen"]
 [ext_resource type="PackedScene" uid="uid://clmxuonke52ib" path="res://scenes/objetos/escaleras/EscaleraLarga2.tscn" id="52_jwl73"]
+[ext_resource type="PackedScene" uid="uid://5gox1i3plsry" path="res://scenes/enemigos/MiniBird.tscn" id="53_1k4cn"]
 [ext_resource type="PackedScene" uid="uid://bj6c2uik0ddmo" path="res://scenes/objetos/Curacion.tscn" id="56_5rx4j"]
 [ext_resource type="PackedScene" uid="uid://ctkttyqmyg11d" path="res://scenes/objetos/escaleras/EscaleraMedia.tscn" id="60_8oh6q"]
 [ext_resource type="PackedScene" uid="uid://4m73hvvn3pen" path="res://scenes/objetos/escaleras/EscaleraCorta.tscn" id="60_c2u7m"]
@@ -69,6 +70,7 @@
 [ext_resource type="PackedScene" uid="uid://deqtuueilhy7t" path="res://scenes/objetos/Plataforma.tscn" id="63_fwxfv"]
 [ext_resource type="PackedScene" uid="uid://uke5wf7ohg2h" path="res://scenes/personajes/killzone.tscn" id="64_f3efj"]
 [ext_resource type="PackedScene" uid="uid://dwsmmu5s576ct" path="res://scenes/objetos/Portal.tscn" id="67_h3qen"]
+[ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="71_nd5kw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_teqfj"]
 texture = ExtResource("10_d3e5e")
@@ -565,14 +567,14 @@ limit_right = 3200
 limit_bottom = 0
 position_smoothing_enabled = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Limites" type="StaticBody2D" parent="."]
 position = Vector2(-5, 103)
 scale = Vector2(0.946983, 0.897987)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limites"]
 shape = SubResource("WorldBoundaryShape2D_d3e5e")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Limites"]
 position = Vector2(3389, 202.676)
 shape = SubResource("WorldBoundaryShape2D_5gj16")
 
@@ -584,55 +586,99 @@ shape = SubResource("WorldBoundaryShape2D_nf628")
 
 [node name="Enemigos" type="Node" parent="."]
 
-[node name="SlimeGreen" parent="Enemigos" instance=ExtResource("51_xvp1p")]
+[node name="Slimes" type="Node" parent="Enemigos"]
+
+[node name="SlimeGreen" parent="Enemigos/Slimes" instance=ExtResource("51_xvp1p")]
 position = Vector2(430, 576)
 
-[node name="SlimePurple" parent="Enemigos" instance=ExtResource("52_h3qen")]
+[node name="SlimePurple" parent="Enemigos/Slimes" instance=ExtResource("52_h3qen")]
 position = Vector2(1390, 352)
 
-[node name="SlimeGreen2" parent="Enemigos" instance=ExtResource("51_xvp1p")]
+[node name="SlimeGreen2" parent="Enemigos/Slimes" instance=ExtResource("51_xvp1p")]
 position = Vector2(2164, 511)
 
-[node name="SlimePurple2" parent="Enemigos" instance=ExtResource("52_h3qen")]
+[node name="SlimePurple2" parent="Enemigos/Slimes" instance=ExtResource("52_h3qen")]
 position = Vector2(1864, 543)
 
-[node name="SlimeGreen3" parent="Enemigos" instance=ExtResource("51_xvp1p")]
+[node name="SlimeGreen3" parent="Enemigos/Slimes" instance=ExtResource("51_xvp1p")]
 position = Vector2(2048, 223)
 
-[node name="SlimePurple3" parent="Enemigos" instance=ExtResource("52_h3qen")]
+[node name="SlimePurple3" parent="Enemigos/Slimes" instance=ExtResource("52_h3qen")]
 position = Vector2(2480, 351)
 
-[node name="SlimePurple4" parent="Enemigos" instance=ExtResource("52_h3qen")]
+[node name="SlimePurple4" parent="Enemigos/Slimes" instance=ExtResource("52_h3qen")]
 position = Vector2(2578, 511)
 
-[node name="SlimePurple5" parent="Enemigos" instance=ExtResource("52_h3qen")]
+[node name="SlimePurple5" parent="Enemigos/Slimes" instance=ExtResource("52_h3qen")]
 position = Vector2(2639, 511)
 
-[node name="SlimeGreen4" parent="Enemigos" instance=ExtResource("51_xvp1p")]
+[node name="SlimeGreen4" parent="Enemigos/Slimes" instance=ExtResource("51_xvp1p")]
 position = Vector2(2869, 511)
 
-[node name="SlimePurple6" parent="Enemigos" instance=ExtResource("52_h3qen")]
+[node name="SlimePurple6" parent="Enemigos/Slimes" instance=ExtResource("52_h3qen")]
 position = Vector2(3090, 511)
+
+[node name="Birds" type="Node" parent="Enemigos"]
+
+[node name="MiniBird" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(26, 66)
+
+[node name="MiniBird2" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(3166, 66)
+
+[node name="MiniBird3" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(300, 150)
+
+[node name="MiniBird4" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(2800, 150)
+
+[node name="MiniBird5" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(859, 163)
+
+[node name="MiniBird6" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(1341, 96)
+
+[node name="MiniBird7" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(21, 427)
+
+[node name="MiniBird8" parent="Enemigos/Birds" instance=ExtResource("53_1k4cn")]
+position = Vector2(1521, 443)
 
 [node name="Objetos" type="Node" parent="."]
 
-[node name="Llave" parent="Objetos" instance=ExtResource("47_rs5qe")]
+[node name="Portal" parent="Objetos" instance=ExtResource("67_h3qen")]
+position = Vector2(2960, 380)
+
+[node name="Node" type="Node" parent="Objetos"]
+
+[node name="Llave" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
 position = Vector2(1139, 178)
 
-[node name="Curacion" parent="Objetos" instance=ExtResource("56_5rx4j")]
+[node name="Llave2" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+position = Vector2(481, 329)
+
+[node name="Llave3" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+position = Vector2(1803, 352)
+
+[node name="Llave4" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+position = Vector2(2348, 483)
+
+[node name="Llave5" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+position = Vector2(1519, 459)
+
+[node name="Curacion" type="Node" parent="Objetos"]
+
+[node name="Curacion" parent="Objetos/Curacion" instance=ExtResource("56_5rx4j")]
 position = Vector2(125, 290)
 scale = Vector2(0.7, 0.7)
 
-[node name="Curacion2" parent="Objetos" instance=ExtResource("56_5rx4j")]
+[node name="Curacion2" parent="Objetos/Curacion" instance=ExtResource("56_5rx4j")]
 position = Vector2(1902, 227)
 scale = Vector2(0.7, 0.7)
 
-[node name="Curacion3" parent="Objetos" instance=ExtResource("56_5rx4j")]
+[node name="Curacion3" parent="Objetos/Curacion" instance=ExtResource("56_5rx4j")]
 position = Vector2(2767, 164)
 scale = Vector2(0.7, 0.7)
-
-[node name="Portal" parent="Objetos" instance=ExtResource("67_h3qen")]
-position = Vector2(2960, 380)
 
 [node name="Plataformas" type="Node" parent="."]
 
@@ -727,3 +773,25 @@ process_mode = 1
 visible = false
 
 [node name="Hud" parent="." instance=ExtResource("5_jwmyu")]
+
+[node name="LabelLlave" type="Label" parent="."]
+offset_left = 23.0
+offset_top = 373.0
+offset_right = 110.0
+offset_bottom = 396.0
+theme_override_fonts/font = ExtResource("71_nd5kw")
+theme_override_font_sizes/font_size = 20
+text = "Busca la llave Correcta"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelEsquivar" type="Label" parent="."]
+offset_left = 1409.0
+offset_top = 390.0
+offset_right = 1627.0
+offset_bottom = 414.0
+theme_override_fonts/font = ExtResource("71_nd5kw")
+theme_override_font_sizes/font_size = 20
+text = "Esquiva a los Enemigos"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -140,6 +140,8 @@ func _fade_out_and_reload():
 	# Resetear vida antes de recargar
 	GameManager.resetear_vida()
 	
+	LlaveManager.resetear()
+	
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
 	await tween.finished

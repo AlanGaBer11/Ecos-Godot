@@ -22,6 +22,7 @@ SceneManager="*res://scripts/singleton/SceneManager.gd"
 CharacterManager="*res://scripts/singleton/CharacterManager.gd"
 LanguageManager="*res://scripts/singleton/LanguageManager.gd"
 GameManager="*res://scripts/singleton/GameManager.gd"
+LlaveManager="*res://scripts/singleton/LlaveManager.gd"
 
 [display]
 

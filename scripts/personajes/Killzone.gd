@@ -40,6 +40,9 @@ func _on_timer_timeout() -> void:
 	# Restaurar velocidad normal
 	Engine.time_scale = 1.0
 	
+	# Resetear llaves 
+	LlaveManager.resetear()
+	
 	# Solo recargar si el jugador sigue vivo
 	if jugador_en_zona and jugador_en_zona.get_salud_actual() > 0:
 		get_tree().reload_current_scene()
