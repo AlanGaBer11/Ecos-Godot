@@ -12,6 +12,7 @@ region = Rect2(0, 0, 20.727, 21)
 radius = 20.025
 
 [node name="Curacion" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_jtw18")
 sonido_recoleccion = ExtResource("2_hhny2")
 
@@ -21,3 +22,5 @@ texture = SubResource("AtlasTexture_myrix")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_myrix")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

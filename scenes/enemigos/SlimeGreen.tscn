@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkqfp738k7u6w"]
+
+[ext_resource type="Script" uid="uid://cy1dxjlx008ti" path="res://scripts/enemigos/Slime.gd" id="1_8rj6q"]
+[ext_resource type="Texture2D" uid="uid://y2uh0xwsa7v5" path="res://assets/sprites/enemigos/slime_green.png" id="1_sny1f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rj6q"]
+atlas = ExtResource("1_sny1f")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfp4s"]
+atlas = ExtResource("1_sny1f")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g7op"]
+atlas = ExtResource("1_sny1f")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gftql"]
+atlas = ExtResource("1_sny1f")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8dy8t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rj6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfp4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g7op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gftql")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfp4s"]
+size = Vector2(10, 14)
+
+[node name="SlimeGreen" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_8rj6q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_8dy8t")
+autoplay = "default"
+frame = 3
+frame_progress = 0.460072
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_rfp4s")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(9, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-10, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -14,7 +14,7 @@ var buttons = []
 var current_button = 0
 
 func _ready():
-		# Asegurar que ocupe toda la pantalla
+	# Asegurar que ocupe toda la pantalla
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	
 	# Reproducir sonido de muerte al aparecer
@@ -137,15 +137,27 @@ func _on_salir_pressed():
 	get_tree().quit()
 
 func _fade_out_and_reload():
+	# Resetear vida antes de recargar
+	GameManager.resetear_vida()
+	
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
 	await tween.finished
+	
+	# Despausar el juego antes de recargar
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _fade_out_and_go_to_menu():
+	# Resetear vida antes de ir al menú
+	GameManager.resetear_vida()
+	
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
 	await tween.finished
+	
+	# Despausar el juego antes de cambiar de escena
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
 
 func _play_select_sound():

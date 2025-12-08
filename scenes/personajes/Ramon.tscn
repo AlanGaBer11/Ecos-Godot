@@ -364,7 +364,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -399,7 +399,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_2_hits",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -448,7 +448,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
-"speed": 6.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -477,7 +477,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 6.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -494,7 +494,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 6.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -517,7 +517,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump_attack",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -540,7 +540,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump_ranged_attack",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -563,7 +563,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"ranged_attack",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -598,7 +598,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -627,7 +627,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"special_attack",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -648,35 +648,42 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bg8l"]
-size = Vector2(57, 84.5)
+size = Vector2(8.8, 17.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_826s0"]
+radius = 3.0
 
 [node name="Ramon" type="CharacterBody2D" groups=["enemigos"]]
+scale = Vector2(2.5, 2.5)
 script = ExtResource("1_2y04b")
 projectile_scene = ExtResource("2_tina6")
 _velocidad_base = 400.0
 es_jugador = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -60)
-scale = Vector2(5, 5)
+position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_v2ubl")
-animation = &"take_damage"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -42.75)
+position = Vector2(-0.4, -8.75)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_0bg8l")
 
 [node name="AttackArea" type="Area2D" parent="."]
-position = Vector2(55, -34)
+position = Vector2(9, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(3, -3)
+shape = SubResource("CircleShape2D_826s0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-23, -3)
 shape = SubResource("CircleShape2D_826s0")
 
 [node name="ProyectilSpawn" type="Node2D" parent="."]
-position = Vector2(-54, -48)
+position = Vector2(11, -10)
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_13ka1")

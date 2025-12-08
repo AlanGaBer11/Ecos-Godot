@@ -9,10 +9,7 @@ extends Area2D
 @export var sonido_recoleccion: AudioStream # Sonido de recolección
 var esta_disponible: bool = true # Estado del objeto
 
-func _ready() -> void:
-	# Conectar la señal de detección de cuerpos
-	body_entered.connect(_on_body_entered)
-	
+func _ready() -> void:	
 	# Agregar animación de flotación
 	agregar_animacion_flotante()
 

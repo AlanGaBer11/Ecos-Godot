@@ -1,3 +1,4 @@
+# Manchas.gd
 class_name Manchas
 extends "res://scripts/personajes/Personaje.gd"
 
@@ -12,14 +13,17 @@ var double_attack_time := 0.5
 var last_attack_time := 0.0
 
 func _ready() -> void:
-	_velocidad_base = 400.0
-	_fuerza_salto_base = 400.0
+	es_jugador = true
+	_velocidad_base = 380.0
+	_fuerza_salto_base = 380.0
 	_max_salud = 15
 	_damage = 2
 	_saltos_disponibles = 1
 	super._ready()
 	
 	attack_area.monitoring = false
+	
+	print("Manchas iniciado - es_jugador: ", es_jugador)
 
 func _on_attack_area_body_entered(body: Node) -> void:
 	if is_attacking and body != self:
@@ -53,12 +57,22 @@ func _physics_process(delta: float) -> void:
 	# -----------------------------
 	# BLOQUEAR MOVIMIENTO DURANTE ATAQUE
 	# -----------------------------
-	if is_attacking:
+	if is_attacking or _is_taking_damage:
 		return
 	
 	# -----------------------------
-	# ANIMACIONES NORMALES
+	# ANIMACIONES
 	# -----------------------------
+	# NUEVO: Verificar primero si está escalando
+	if en_escalera:
+		# La animación "climb" ya se maneja en Personaje.gd
+		# Solo actualizamos la dirección del sprite si se mueve horizontalmente
+		if velocity.x != 0:
+			last_direction = "left" if velocity.x < 0 else "right"
+			sprite.flip_h = (last_direction == "left")
+		return  # Salir para no ejecutar las animaciones de abajo
+	
+	# Animaciones normales (solo si NO está escalando)
 	if not is_on_floor():
 		sprite.play("jump") if velocity.y < 0 else sprite.play("fall")
 	else:

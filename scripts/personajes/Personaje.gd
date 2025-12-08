@@ -22,21 +22,34 @@ var _esta_vivo: bool = true
 var _is_taking_damage: bool = false
 var _knockback_direction := 0
 
+# -------------------------------
+# SISTEMA DE ESCALERAS
+# -------------------------------
+var en_escalera: bool = false
+var puede_escalar: bool = false
+@export var velocidad_escalera: float = 150.0
+
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 var death_screen_scene = preload("res://scenes/menus/DeathScreen.tscn")
-var death_sound_playing = false
 
 # --------------------------------------------------------------------------
 # CICLO DE VIDA
 # --------------------------------------------------------------------------
 func _ready() -> void:
-	_salud_actual = _max_salud
+	# Cargar vida guardada del GameManager
+	if GameManager.obtener_vida() > 0:
+		_salud_actual = GameManager.obtener_vida()
+	else:
+		_salud_actual = _max_salud
+	
 	_saltos_maximos = _saltos_disponibles
 	if sprite:
 		sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	
 	# NUEVO: Emitir vida inicial
 	vida_cambio.emit(_salud_actual, _max_salud)
+	print(name, " iniciado con vida: ", _salud_actual)
 
 # --------------------------------------------------------------------------
 # LÓGICA DE MOVIMIENTO BASE
@@ -46,7 +59,16 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# 1. Aplicar gravedad
-	aplicar_gravedad(delta)
+	# SISTEMA DE ESCALERAS
+	manejar_escalera(delta)
+
+	if not en_escalera:
+		# 1. Aplicar gravedad solo si NO está escalando
+		aplicar_gravedad(delta)
+	else:
+		# Si escala, sin saltos y sin gravedad
+		velocity.y = velocity.y
+		_saltos_disponibles = _saltos_maximos
 
 	# 2. Movimiento y salto (solo si es jugador)
 	if es_jugador and not _is_taking_damage:
@@ -81,7 +103,10 @@ func manejar_salto() -> void:
 # MÉTODOS POLIMÓRFICOS
 # --------------------------------------------------------------------------
 func saltar() -> void:
-	if Input.is_action_just_pressed("ui_up") and _saltos_disponibles > 0:
+	if  en_escalera: # No salta mientras escala
+		return
+		
+	if Input.is_action_just_pressed("ui_jump") and _saltos_disponibles > 0:
 		velocity.y = -_fuerza_salto_base
 		_saltos_disponibles -= 1
 
@@ -106,6 +131,7 @@ func get_max_salud() -> int:
 # SISTEMA DE DAÑO
 # --------------------------------------------------------------------------
 func aplicar_dano(objetivo: Node) -> void:
+	
 	if objetivo and objetivo.has_method("recibir_danio"):
 		objetivo.recibir_danio(_damage, global_position)
 
@@ -116,6 +142,9 @@ func recibir_danio(cantidad: int, origen: Vector2 = Vector2.ZERO) -> void:
 	_salud_actual -= cantidad
 	_salud_actual = clamp(_salud_actual, 0, _max_salud)
 	print(name, " recibió ", cantidad, " de daño. Salud restante: ", _salud_actual)
+	
+	# Guardar vida en GameManager
+	GameManager.guardar_vida(_salud_actual)
 	
 	# NUEVO: Emitir cambio de vida
 	vida_cambio.emit(_salud_actual, _max_salud)
@@ -140,10 +169,8 @@ func morir() -> void:
 	_esta_vivo = false
 	print(name, " ha sido derrotado.")
 	
-	# Reproducir sonido de muerte
-	if has_node("DeathSound"):
-		$DeathSound.play()
-		death_sound_playing = true
+	# Resetear vida en GameManager
+	GameManager.resetear_vida()
 	
 	# Desactivar físicas y controles
 	set_physics_process(false)
@@ -157,9 +184,6 @@ func morir() -> void:
 		var fps = sprite.sprite_frames.get_animation_speed("death")
 		var duration = frame_count / fps if fps > 0 else 1.0
 		await get_tree().create_timer(duration).timeout
-		# Si el sonido aún está sonando, espéralo
-		if $DeathSound.playing:
-			await $DeathSound.finished
 	else:
 		# Si no hay animación de muerte, esperar un momento
 		await get_tree().create_timer(0.5).timeout
@@ -181,3 +205,46 @@ func _on_animation_finished() -> void:
 		_is_taking_damage = false
 		_knockback_direction = 0
 		print(name, " terminó animación de daño")
+
+
+# ======================================================================
+# SISTEMA DE ESCALERAS
+# ======================================================================
+
+func entrar_escalera() -> void:
+	puede_escalar = true
+
+func salir_escalera() -> void:
+	puede_escalar = false
+	en_escalera = false
+
+func manejar_escalera(delta: float) -> void:
+	if not puede_escalar:
+		en_escalera = false
+		return
+
+	var subir = Input.is_action_pressed("ui_up")
+	var bajar = Input.is_action_pressed("ui_down")
+
+	# Detectar si estamos intentando escalar
+	if subir or bajar:
+		en_escalera = true
+
+	# Si estamos escalando, anulamos gravedad
+	if en_escalera:
+		velocity.y = 0
+
+		if subir:
+			velocity.y = -velocidad_escalera
+		elif bajar:
+			velocity.y = velocidad_escalera
+		else:
+			velocity.y = 0
+
+		# Animación CLIMB
+		if sprite.animation != "climb":
+			sprite.play("climb")
+	else:
+		# Si no se presiona subir/bajar, salir de escalera si no hay overlap
+		if not puede_escalar:
+			en_escalera = false

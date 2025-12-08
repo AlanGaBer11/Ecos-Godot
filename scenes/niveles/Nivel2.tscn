@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmaqc1g5giokg"]
+
+[ext_resource type="PackedScene" uid="uid://cmjkyy3to1my5" path="res://scenes/menus/PauseMenu.tscn" id="1_jdtny"]
+[ext_resource type="PackedScene" uid="uid://bya36iv3r8cox" path="res://scenes/hud/HUD.tscn" id="1_wj8ln"]
+
+[node name="Nivel2" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Pause" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="Pause" instance=ExtResource("1_jdtny")]
+process_mode = 1
+visible = false
+
+[node name="Hud" parent="." instance=ExtResource("1_wj8ln")]

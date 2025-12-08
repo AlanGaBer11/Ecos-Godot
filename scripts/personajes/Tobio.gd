@@ -15,14 +15,16 @@ var can_shoot := true
 var shoot_cooldown := 0.5
 
 func _ready() -> void:
-	_velocidad_base = 480.0
-	_fuerza_salto_base = 460.0
+	es_jugador = true
+	_velocidad_base = 350.0
+	_fuerza_salto_base = 430.0
 	_max_salud = 10
 	_damage = 1
 	super._ready()
-
 	
 	attack_area.monitoring = false
+	
+	print("Tobio iniciado - es_jugador: ", es_jugador)
 
 func _on_attack_area_body_entered(body: Node) -> void:	
 	if is_attacking and body != self:
@@ -31,14 +33,14 @@ func _on_attack_area_body_entered(body: Node) -> void:
 func _physics_process(delta: float) -> void:
 	if not _esta_vivo:
 		return
-
+	
 	super._physics_process(delta)
-
+	
 	if not can_shoot:
 		shoot_cooldown -= delta
 		if shoot_cooldown <= 0.0:
 			can_shoot = true
-
+	
 	if not is_attacking and not _is_taking_damage:
 		if Input.is_action_just_pressed("ui_attack"):
 			_atacar()
@@ -46,10 +48,21 @@ func _physics_process(delta: float) -> void:
 			_ataque_especial()
 		elif Input.is_action_just_pressed("ui_fire") and can_shoot:
 			_disparar()
-
+	
+	# IMPORTANTE: No manejar animaciones si está atacando o recibiendo daño
 	if is_attacking or _is_taking_damage:
 		return
-
+	
+	# NUEVO: Verificar primero si está escalando
+	if en_escalera:
+		# La animación "climb" ya se maneja en Personaje.gd
+		# Solo actualizamos la dirección del sprite si se mueve horizontalmente
+		if velocity.x != 0:
+			last_direction = "left" if velocity.x < 0 else "right"
+			sprite.flip_h = (last_direction == "left")
+		return  # Salir para no ejecutar las animaciones de abajo
+	
+	# Animaciones normales (solo si NO está escalando)
 	if not is_on_floor():
 		sprite.play("jump") if velocity.y < 0 else sprite.play("fall")
 	else:
@@ -108,7 +121,7 @@ func _lanzar_proyectil() -> void:
 func _on_animated_sprite_2d_frame_changed() -> void:
 	var anim = sprite.animation
 	var current_frame = sprite.frame
-
+	
 	if anim in ["ranged_attack", "jump_ranged_attack"] and current_frame == 3 and not projectile_fired:
 		_lanzar_proyectil()
 		projectile_fired = true
@@ -120,7 +133,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 			_realizar_golpe()
 		elif anim == "jump_attack" and current_frame == 1:
 			_realizar_golpe()
-
+	
 	if anim in ["attack","jump_attack","ranged_attack", "jump_ranged_attack", "special_attack"] and current_frame == sprite.sprite_frames.get_frame_count(anim) - 1:
 		await get_tree().create_timer(0.05).timeout
 		is_attacking = false

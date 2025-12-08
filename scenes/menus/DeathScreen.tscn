@@ -52,10 +52,10 @@ theme_override_constants/separation = 40
 layout_mode = 2
 
 [node name="SkullSprite" type="TextureRect" parent="Control/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("1_dxt3o")
-stretch_mode = 1
 
 [node name="DeathText" type="Label" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -65,7 +65,7 @@ theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("1_yl087")
 theme_override_font_sizes/font_size = 72
-text = "HAS MUERTO"
+text = "DeathText"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Control/CenterContainer/VBoxContainer"]
@@ -82,14 +82,14 @@ custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yl087")
 theme_override_font_sizes/font_size = 24
-text = "Reintentar"
+text = "ReintentarButton"
 
 [node name="MenuButton" type="Button" parent="Control/CenterContainer/VBoxContainer/ButtonsContainer"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yl087")
 theme_override_font_sizes/font_size = 24
-text = "Menú Principal"
+text = "MenuButton"
 
 [node name="ExitButton" type="Button" parent="Control/CenterContainer/VBoxContainer/ButtonsContainer"]
 custom_minimum_size = Vector2(250, 50)
@@ -102,7 +102,7 @@ text = "ExitButton"
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("4_37k8u")
-bus = &"Music"
+bus = &"SFX"
 parameters/looping = true
 
 [node name="SelectSound" type="AudioStreamPlayer" parent="Sounds"]

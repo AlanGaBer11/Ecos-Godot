@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://4m73hvvn3pen"]
+
+[ext_resource type="Texture2D" uid="uid://bx6k3ki0c80qh" path="res://assets/sprites/objetos/escaleras/Ladder_down_1.png" id="1_b82cy"]
+[ext_resource type="Script" uid="uid://c11bc7dxj0brs" path="res://scripts/objetos/Escalera.gd" id="1_jk8vf"]
+[ext_resource type="Texture2D" uid="uid://cefnbirhk75lw" path="res://assets/sprites/objetos/escaleras/Ladder_middle_1.png" id="2_jk8vf"]
+[ext_resource type="Texture2D" uid="uid://ugoysayoqsec" path="res://assets/sprites/objetos/escaleras/Ladder_top_1.png" id="3_as6dn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ypso"]
+size = Vector2(12, 95.5)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hsokm"]
+texture = ExtResource("1_b82cy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8utp"]
+texture = ExtResource("2_jk8vf")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_45eer"]
+texture = ExtResource("3_as6dn")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_00qr7"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_hsokm")
+sources/1 = SubResource("TileSetAtlasSource_y8utp")
+sources/2 = SubResource("TileSetAtlasSource_45eer")
+
+[node name="EscaleraCorta" type="Area2D"]
+script = ExtResource("1_jk8vf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, -48.25)
+shape = SubResource("RectangleShape2D_3ypso")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 255, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 253, 255, 2, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_00qr7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

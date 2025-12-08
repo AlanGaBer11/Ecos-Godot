@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://uke5wf7ohg2h"]
+
+[ext_resource type="Script" uid="uid://d4gby7m2ydyty" path="res://scripts/personajes/Killzone.gd" id="1_0ebml"]
+
+[node name="Killzone" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_0ebml")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

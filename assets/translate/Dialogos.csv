@@ -5,7 +5,7 @@ OptionsButton,Opciones,Options,Opções
 ExitButton,Salir,Exit,Sair
 OptionsTitle,Opciones,Options,Opções
 LabelVol,Volumen de la Música,Music Volume,Volume da Música
-SfxLabel,Volumen de Efectos,SFX Volume,Volume dos Efeitos
+SfxLabel,Volumen de Efectos,SFX Volume,Volume dos Efeitos Sonoros
 FullScreen,Pantalla Completa,Full Screen,Tela Cheia
 SaveButton,Guardar,Save,Salvar
 BackButton,Volver,Back,Voltar
@@ -15,4 +15,7 @@ SelectButton,Seleccionar,Select,Selecionar
 HealthLabel,Vida,Health,Vida
 DamageLabel,Daño,Damage,Dano
 SpeedLabel,Velocidad,Speed,Velocidade
-JumpLabel,Salto,Jump,Pulo
+JumpLabel,Salto,Jump,Pular
+DeathText,Has Muerto,You Died,Você Morreu
+ReintentarButton,Reintentar,Retry,Tentar Novamente
+MenuButton,Menú Principal,Main Menu,Menu Principal
