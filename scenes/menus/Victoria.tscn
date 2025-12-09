@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://lkxnfqt4crqr"]
+
+[ext_resource type="Script" uid="uid://d2j2e8c84nkod" path="res://scripts/menus/Victoria.gd" id="1_1heqe"]
+[ext_resource type="FontFile" uid="uid://mudur2ixejxu" path="res://assets/fonts/LilitaOne-Regular.ttf" id="1_rrhm8"]
+
+[node name="Victoria" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1heqe")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="WinLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_rrhm8")
+theme_override_font_sizes/font_size = 64
+text = "¡GANASTE!"
+horizontal_alignment = 1
+
+[node name="DerrotaLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_rrhm8")
+theme_override_font_sizes/font_size = 40
+text = "Has derrotado a Ramón"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "ExitButton"

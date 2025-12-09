@@ -409,3 +409,19 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			attack_area.monitoring = false
 			ia_estado = "chase"
 			sprite.play("idle")
+
+func morir() -> void:
+	if not _esta_vivo:
+		return
+
+	_esta_vivo = false
+	sprite.play("death")
+
+	# Esperamos que acabe animación o 1 segundo máximo
+	await get_tree().create_timer(1.0).timeout
+
+	# Cargar escena de victoria
+	var escena_ganaste = load("res://scenes/menus/Victoria.tscn").instantiate()
+	get_tree().current_scene.add_child(escena_ganaste)
+
+	print("🎉 Ganaste: Ramón ha sido derrotado")
