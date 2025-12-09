@@ -649,21 +649,21 @@ position = Vector2(1521, 443)
 [node name="Portal" parent="Objetos" instance=ExtResource("67_h3qen")]
 position = Vector2(2960, 380)
 
-[node name="Node" type="Node" parent="Objetos"]
+[node name="Llaves" type="Node" parent="Objetos"]
 
-[node name="Llave" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+[node name="Llave" parent="Objetos/Llaves" instance=ExtResource("47_rs5qe")]
 position = Vector2(1139, 178)
 
-[node name="Llave2" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+[node name="Llave2" parent="Objetos/Llaves" instance=ExtResource("47_rs5qe")]
 position = Vector2(481, 329)
 
-[node name="Llave3" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+[node name="Llave3" parent="Objetos/Llaves" instance=ExtResource("47_rs5qe")]
 position = Vector2(1803, 352)
 
-[node name="Llave4" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+[node name="Llave4" parent="Objetos/Llaves" instance=ExtResource("47_rs5qe")]
 position = Vector2(2348, 483)
 
-[node name="Llave5" parent="Objetos/Node" instance=ExtResource("47_rs5qe")]
+[node name="Llave5" parent="Objetos/Llaves" instance=ExtResource("47_rs5qe")]
 position = Vector2(1519, 459)
 
 [node name="Curacion" type="Node" parent="Objetos"]

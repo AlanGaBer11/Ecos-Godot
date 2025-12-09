@@ -1,3 +1,4 @@
+# SelectCharacter.gd
 extends Control
 
 @export var Personajes: Array[CharacterData]

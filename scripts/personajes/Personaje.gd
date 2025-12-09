@@ -143,6 +143,10 @@ func recibir_danio(cantidad: int, origen: Vector2 = Vector2.ZERO) -> void:
 	if not _esta_vivo or _is_taking_damage:
 		return
 
+	#  SALIR DE ESCALERAS AL RECIBIR DAÑO
+	en_escalera = false
+	puede_escalar = false
+	
 	_salud_actual -= cantidad
 	_salud_actual = clamp(_salud_actual, 0, _max_salud)
 	print(name, " recibió ", cantidad, " de daño. Salud restante: ", _salud_actual)
@@ -216,6 +220,8 @@ func _on_animation_finished() -> void:
 # ======================================================================
 
 func entrar_escalera() -> void:
+	if not es_jugador:  # Solo jugadores usan escaleras
+		return
 	puede_escalar = true
 
 func salir_escalera() -> void:

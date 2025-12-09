@@ -2,7 +2,7 @@
 class_name Portal
 extends Area2D
 
-@export var next_level_path: String = "res://scenes/niveles/Nivel2.tscn"
+@export var next_level_path: String = "res://scenes/niveles/Nivel_Jefe.tscn"
 @export var mensaje_sin_llave: String = "Necesitas la Llave Correcta" 
 @export var duracion_mensaje: float = 2.0
 @export var sonido_portal: AudioStream

@@ -3,8 +3,8 @@ class_name BarraVidaEnemigo
 extends Control
 
 # Configuración visual
-@export var barra_ancho: float = 80.0
-@export var barra_alto: float = 8.0
+@export var barra_ancho: float = 30.0
+@export var barra_alto: float = 3.0
 @export var offset_y: float = -100  # Distancia sobre el enemigo
 @export var color_fondo: Color = Color(0.2, 0.2, 0.2, 0.8)  # Gris oscuro
 @export var color_vida: Color = Color(0.8, 0.1, 0.1, 1.0)  # Rojo
